@@ -32,7 +32,7 @@ class HomeScreenState extends State<HomeScreen> {
               ),
               elevation: 0,
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/questions');
+                Navigator.pushNamed(context, '/questions');
               },
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.07,
@@ -79,13 +79,15 @@ class HomeScreenState extends State<HomeScreen> {
                 borderRadius: new BorderRadius.circular(15.0),
               ),
               elevation: 0,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/symptoms');
+              },
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.30,
                 width: MediaQuery.of(context).size.width * 0.30,
                 child: Center(
                   child: Text(
-                    'Local Statistics',
+                    'Symptoms and Information',
                     style: TextStyle(color: Colors.white),
                     textAlign: TextAlign.center,
                   ),
