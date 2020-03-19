@@ -1,4 +1,4 @@
-#Wed Mar 18 01:23:25 BDT 2020
-base.0=/home/shanjinur/Desktop/covid19/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+#Thu Mar 19 14:34:08 BDT 2020
+base.0=/home/shanjinur/Desktop/COVID19/Spondon/covid19/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

@@ -32,7 +32,7 @@ class HomeScreenState extends State<HomeScreen> {
               ),
               elevation: 0,
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/questions');
+                Navigator.pushNamed(context, '/questions');
               },
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.07,
