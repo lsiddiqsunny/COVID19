@@ -614,7 +614,7 @@ class QuestionCardState extends State<QuestionCard> {
                           borderRadius: new BorderRadius.circular(25.0),
                           side: BorderSide(color: Colors.blueAccent, width: 2)),
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/home');
+                        Navigator.pop(context);
                       },
                       child: Container(
                           height: 50,

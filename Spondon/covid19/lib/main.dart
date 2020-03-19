@@ -1,5 +1,6 @@
 import 'package:covid19/view/home.dart';
 import 'package:covid19/view/question.dart';
+import 'package:covid19/view/symtoms.dart';
 import 'package:covid19/view/welcome.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => new WelcomeScreen(),
         '/home': (context) => HomeScreen(),
         '/questions': (context) => QuestionScreen(),
+        '/symptoms': (context) => Symptoms(),
       },
     );
   }
