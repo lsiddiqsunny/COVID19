@@ -1,4 +1,5 @@
 import 'package:covid19/view/home.dart';
+import 'package:covid19/view/map.dart';
 import 'package:covid19/view/question.dart';
 import 'package:covid19/view/symtoms.dart';
 import 'package:covid19/view/welcome.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => HomeScreen(),
         '/questions': (context) => QuestionScreen(),
         '/symptoms': (context) => Symptoms(),
+        '/map': (context) => MapPage()
       },
     );
   }

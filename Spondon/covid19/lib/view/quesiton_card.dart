@@ -1,5 +1,6 @@
 import 'package:covid19/controller/form_controller.dart';
 import 'package:covid19/model/form.dart';
+import 'package:covid19/view/predict.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -80,256 +81,249 @@ class QuestionCardState extends State<QuestionCard> {
   }
 
   List<String> countries = [
-    'Not Applicable'
-        'Afghanistan,AF',
-    'Åland Islands,AX',
-    'Albania,AL',
-    'Algeria,DZ',
-    'American Samoa,AS',
-    'Andorra,AD',
-    'Angola,AO',
-    'Anguilla,AI',
-    'Antarctica,AQ',
-    'Antigua and Barbuda,AG',
-    'Argentina,AR',
-    'Armenia,AM',
-    'Aruba,AW',
-    'Australia,AU',
-    'Austria,AT',
-    'Azerbaijan,AZ',
-    'Bahamas,BS',
-    'Bahrain,BH',
-    'Bangladesh,BD',
-    'Barbados,BB',
-    'Belarus,BY',
-    'Belgium,BE',
-    'Belize,BZ',
-    'Benin,BJ',
-    'Bermuda,BM',
-    'Bhutan,BT',
-    '"Bolivia, Plurinational State of",BO',
-    '"Bonaire, Sint Eustatius and Saba",BQ',
-    'Bosnia and Herzegovina,BA',
-    'Botswana,BW',
-    'Bouvet Island,BV',
-    'Brazil,BR',
-    'British Indian Ocean Territory,IO',
-    'Brunei Darussalam,BN',
-    'Bulgaria,BG',
-    'Burkina Faso,BF',
-    'Burundi,BI',
-    'Cambodia,KH',
-    'Cameroon,CM',
-    'Canada,CA',
-    'Cape Verde,CV',
-    'Cayman Islands,KY',
-    'Central African Republic,CF',
-    'Chad,TD',
-    'Chile,CL',
-    'China,CN',
-    'Christmas Island,CX',
-    'Cocos (Keeling) Islands,CC',
-    'Colombia,CO',
-    'Comoros,KM',
-    'Congo,CG',
-    '"Congo, the Democratic Republic of the",CD',
-    'Cook Islands,CK',
-    'Costa Rica,CR',
-    'Côte d\'Ivoire,CI',
-    'Croatia,HR',
-    'Cuba,CU',
-    'Curaçao,CW',
-    'Cyprus,CY',
-    'Czech Republic,CZ',
-    'Denmark,DK',
-    'Djibouti,DJ',
-    'Dominica,DM',
-    'Dominican Republic,DO',
-    'Ecuador,EC',
-    'Egypt,EG',
-    'El Salvador,SV',
-    'Equatorial Guinea,GQ',
-    'Eritrea,ER',
-    'Estonia,EE',
-    'Ethiopia,ET',
-    'Falkland Islands (Malvinas),FK',
-    'Faroe Islands,FO',
-    'Fiji,FJ',
-    'Finland,FI',
-    'France,FR',
-    'French Guiana,GF',
-    'French Polynesia,PF',
-    'French Southern Territories,TF',
-    'Gabon,GA',
-    'Gambia,GM',
-    'Georgia,GE',
-    'Germany,DE',
-    'Ghana,GH',
-    'Gibraltar,GI',
-    'Greece,GR',
-    'Greenland,GL',
-    'Grenada,GD',
-    'Guadeloupe,GP',
-    'Guam,GU',
-    'Guatemala,GT',
-    'Guernsey,GG',
-    'Guinea,GN',
-    'Guinea-Bissau,GW',
-    'Guyana,GY',
-    'Haiti,HT',
-    'Heard Island and McDonald Islands,HM',
-    'Holy See (Vatican City State),VA',
-    'Honduras,HN',
-    'Hong Kong,HK',
-    'Hungary,HU',
-    'Iceland,IS',
-    'India,IN',
-    'Indonesia,ID',
-    '"Iran, Islamic Republic of",IR',
-    'Iraq,IQ',
-    'Ireland,IE',
-    'Isle of Man,IM',
-    'Israel,IL',
-    'Italy,IT',
-    'Jamaica,JM',
-    'Japan,JP',
-    'Jersey,JE',
-    'Jordan,JO',
-    'Kazakhstan,KZ',
-    'Kenya,KE',
-    'Kiribati,KI',
-    '"Korea, Democratic People\'s Republic of",KP',
-    '"Korea, Republic of",KR',
-    'Kuwait,KW',
-    'Kyrgyzstan,KG',
-    'Lao People\'s Democratic Republic,LA',
-    'Latvia,LV',
-    'Lebanon,LB',
-    'Lesotho,LS',
-    'Liberia,LR',
-    'Libya,LY',
-    'Liechtenstein,LI',
-    'Lithuania,LT',
-    'Luxembourg,LU',
-    'Macao,MO',
-    '"Macedonia, the Former Yugoslav Republic of",MK',
-    'Madagascar,MG',
-    'Malawi,MW',
-    'Malaysia,MY',
-    'Maldives,MV',
-    'Mali,ML',
-    'Malta,MT',
-    'Marshall Islands,MH',
-    'Martinique,MQ',
-    'Mauritania,MR',
-    'Mauritius,MU',
-    'Mayotte,YT',
-    'Mexico,MX',
-    '"Micronesia, Federated States of",FM',
-    '"Moldova, Republic of",MD',
-    'Monaco,MC',
-    'Mongolia,MN',
-    'Montenegro,ME',
-    'Montserrat,MS',
-    'Morocco,MA',
-    'Mozambique,MZ',
-    'Myanmar,MM',
-    'Namibia,NA',
-    'Nauru,NR',
-    'Nepal,NP',
-    'Netherlands,NL',
-    'New Caledonia,NC',
-    'New Zealand,NZ',
-    'Nicaragua,NI',
-    'Niger,NE',
-    'Nigeria,NG',
-    'Niue,NU',
-    'Norfolk Island,NF',
-    'Northern Mariana Islands,MP',
-    'Norway,NO',
-    'Oman,OM',
-    'Pakistan,PK',
-    'Palau,PW',
-    '"Palestine, State of",PS',
-    'Panama,PA',
-    'Papua New Guinea,PG',
-    'Paraguay,PY',
-    'Peru,PE',
-    'Philippines,PH',
-    'Pitcairn,PN',
-    'Poland,PL',
-    'Portugal,PT',
-    'Puerto Rico,PR',
-    'Qatar,QA',
-    'Réunion,RE',
-    'Romania,RO',
-    'Russian Federation,RU',
-    'Rwanda,RW',
-    'Saint Barthélemy,BL',
-    '"Saint Helena, Ascension and Tristan da Cunha",SH',
-    'Saint Kitts and Nevis,KN',
-    'Saint Lucia,LC',
-    'Saint Martin (French part),MF',
-    'Saint Pierre and Miquelon,PM',
-    'Saint Vincent and the Grenadines,VC',
-    'Samoa,WS',
-    'San Marino,SM',
-    'Sao Tome and Principe,ST',
-    'Saudi Arabia,SA',
-    'Senegal,SN',
-    'Serbia,RS',
-    'Seychelles,SC',
-    'Sierra Leone,SL',
-    'Singapore,SG',
-    'Sint Maarten (Dutch part),SX',
-    'Slovakia,SK',
-    'Slovenia,SI',
-    'Solomon Islands,SB',
-    'Somalia,SO',
-    'South Africa,ZA',
-    'South Georgia and the South Sandwich Islands,GS',
-    'South Sudan,SS',
-    'Spain,ES',
-    'Sri Lanka,LK',
-    'Sudan,SD',
-    'Suriname,SR',
-    'Svalbard and Jan Mayen,SJ',
-    'Swaziland,SZ',
-    'Sweden,SE',
-    'Switzerland,CH',
-    'Syrian Arab Republic,SY',
-    '"Taiwan, Province of China",TW',
-    'Tajikistan,TJ',
-    '"Tanzania, United Republic of",TZ',
-    'Thailand,TH',
-    'Timor-Leste,TL',
-    'Togo,TG',
-    'Tokelau,TK',
-    'Tonga,TO',
-    'Trinidad and Tobago,TT',
-    'Tunisia,TN',
-    'Turkey,TR',
-    'Turkmenistan,TM',
-    'Turks and Caicos Islands,TC',
-    'Tuvalu,TV',
-    'Uganda,UG',
-    'Ukraine,UA',
-    'United Arab Emirates,AE',
-    'United Kingdom,GB',
-    'United States,US',
-    'United States Minor Outlying Islands,UM',
-    'Uruguay,UY',
-    'Uzbekistan,UZ',
-    'Vanuatu,VU',
-    '"Venezuela, Bolivarian Republic of",VE',
-    'Viet Nam,VN',
-    '"Virgin Islands, British",VG',
-    '"Virgin Islands, U.S.",VI',
-    'Wallis and Futuna,WF',
-    'Western Sahara,EH',
-    'Yemen,YE',
-    'Zambia,ZM',
-    'Zimbabwe,ZW',
+    'Afghanistan',
+    'Åland Islands',
+    'Albania',
+    'Algeria',
+    'American Samoa',
+    'Andorra',
+    'Angola',
+    'Anguilla',
+    'Antarctica',
+    'Antigua and Barbuda',
+    'Argentina',
+    'Armenia',
+    'Aruba',
+    'Australia',
+    'Austria',
+    'Azerbaijan',
+    'Bahamas',
+    'Bahrain',
+    'Bangladesh',
+    'Barbados',
+    'Belarus',
+    'Belgium',
+    'Belize',
+    'Benin',
+    'Bermuda',
+    'Bhutan',
+    'Bolivia',
+    'Bonaire',
+    'Bosnia and Herzegovina',
+    'Botswana',
+    'Bouvet Island',
+    'Brazil',
+    'British Indian Ocean Territory',
+    'Brunei Darussalam',
+    'Bulgaria',
+    'Burkina Faso',
+    'Burundi',
+    'Cambodia',
+    'Cameroon',
+    'Canada',
+    'Cape Verde',
+    'Cayman Islands',
+    'Central African Republic',
+    'Chad',
+    'Chile',
+    'China',
+    'Christmas Island',
+    'Cocos (Keeling) Islands',
+    'Colombia',
+    'Comoros',
+    'Congo',
+    '"Congo',
+    'Cook Islands',
+    'Costa Rica',
+    'Côte d\'Ivoire',
+    'Croatia',
+    'Cuba',
+    'Curaçao',
+    'Cyprus',
+    'Czech Republic',
+    'Denmark',
+    'Djibouti',
+    'Dominica',
+    'Dominican Republic',
+    'Ecuador',
+    'Egypt',
+    'El Salvador',
+    'Equatorial Guinea',
+    'Eritrea',
+    'Estonia',
+    'Ethiopia',
+    'Falkland Islands (Malvinas)',
+    'Faroe Islands',
+    'Fiji',
+    'Finland',
+    'France',
+    'French Guiana',
+    'French Polynesia',
+    'French Southern Territories',
+    'Gabon',
+    'Gambia',
+    'Georgia',
+    'Germany',
+    'Ghana',
+    'Gibraltar',
+    'Greece',
+    'Greenland',
+    'Grenada',
+    'Guadeloupe',
+    'Guam',
+    'Guatemala',
+    'Guernsey',
+    'Guinea',
+    'Guinea-Bissau',
+    'Guyana',
+    'Haiti',
+    'Honduras',
+    'Hong Kong',
+    'Hungary',
+    'Iceland',
+    'India',
+    'Indonesia',
+    'Iran',
+    'Iraq',
+    'Ireland',
+    'Isle of Man',
+    'Israel',
+    'Italy',
+    'Jamaica',
+    'Japan',
+    'Jersey',
+    'Jordan',
+    'Kazakhstan',
+    'Kenya',
+    'Kiribati',
+    'North Korea',
+    'South Korea',
+    'Kuwait',
+    'Kyrgyzstan',
+    'Lao People\'s Democratic Republic',
+    'Latvia',
+    'Lebanon',
+    'Lesotho',
+    'Liberia',
+    'Libya',
+    'Liechtenstein',
+    'Lithuania',
+    'Luxembourg',
+    'Macao',
+    'Macedonia',
+    'Madagascar',
+    'Malawi',
+    'Malaysia',
+    'Maldives',
+    'Mali',
+    'Malta',
+    'Marshall Islands',
+    'Martinique',
+    'Mauritania',
+    'Mauritius',
+    'Mayotte',
+    'Mexico',
+    'Micronesia',
+    'Moldova',
+    'Monaco',
+    'Mongolia',
+    'Montenegro',
+    'Montserrat',
+    'Morocco',
+    'Mozambique',
+    'Myanmar',
+    'Namibia',
+    'Nauru',
+    'Nepal',
+    'Netherlands',
+    'New Caledonia',
+    'New Zealand',
+    'Nicaragua',
+    'Niger',
+    'Nigeria',
+    'Niue',
+    'Norfolk Island',
+    'Northern Mariana Islands',
+    'Norway',
+    'Oman',
+    'Pakistan',
+    'Palau',
+    'Palestine',
+    'Panama',
+    'Papua New Guinea',
+    'Paraguay',
+    'Peru',
+    'Philippines',
+    'Pitcairn',
+    'Poland',
+    'Portugal',
+    'Puerto Rico',
+    'Qatar',
+    'Réunion',
+    'Romania',
+    'Russian Federation',
+    'Rwanda',
+    'Saint Barthélemy',
+    '"Saint Helena',
+    'Saint Kitts and Nevis',
+    'Saint Lucia',
+    'Saint Martin (French part)',
+    'Saint Pierre and Miquelon',
+    'Saint Vincent and the Grenadines',
+    'Samoa',
+    'San Marino',
+    'Sao Tome and Principe',
+    'Saudi Arabia',
+    'Senegal',
+    'Serbia',
+    'Seychelles',
+    'Sierra Leone',
+    'Singapore',
+    'Sint Maarten (Dutch part)',
+    'Slovakia',
+    'Slovenia',
+    'Solomon Islands',
+    'Somalia',
+    'South Africa',
+    'South Georgia and the South Sandwich Islands',
+    'South Sudan',
+    'Spain',
+    'Sri Lanka',
+    'Sudan',
+    'Suriname',
+    'Svalbard and Jan Mayen',
+    'Swaziland',
+    'Sweden',
+    'Switzerland',
+    'Syrian Arab Republic',
+    'Taiwan',
+    'Tajikistan',
+    'Tanzania',
+    'Thailand',
+    'Timor-Leste',
+    'Togo',
+    'Tokelau',
+    'Tonga',
+    'Trinidad and Tobago',
+    'Tunisia',
+    'Turkey',
+    'Turkmenistan',
+    'Turks and Caicos Islands',
+    'Tuvalu',
+    'Uganda',
+    'Ukraine',
+    'United Arab Emirates',
+    'United Kingdom',
+    'United States',
+    'United States Minor Outlying Islands',
+    'Uruguay',
+    'Uzbekistan',
+    'Vanuatu',
+    'Venezuela',
+    'Viet Nam',
+    'Yemen',
+    'Zambia',
+    'Zimbabwe',
   ];
 
   Widget age() {
@@ -338,6 +332,7 @@ class QuestionCardState extends State<QuestionCard> {
       ages.add(i.toString());
     }
     return Column(children: <Widget>[
+      new Text('I am'),
       new DropdownButton<String>(
         value: _selectedAge,
         hint: Text(
@@ -371,6 +366,7 @@ class QuestionCardState extends State<QuestionCard> {
     List<String> gender = ['Male', 'Female', 'Other'];
 
     return Column(children: <Widget>[
+      new Text('I am'),
       new DropdownButton<String>(
         value: _selectedGender,
         hint: Text(
@@ -730,29 +726,178 @@ class QuestionCardState extends State<QuestionCard> {
     );
   }
 
-  showAlertDialog(BuildContext context) {
-    // set up the button
-    Widget okButton = FlatButton(
-      child: Text("OK"),
-      onPressed: () {},
-    );
+  _showSnackbar(String message) {
+    final snackBar = SnackBar(content: Text(message));
+    widget.scaffoldKey.currentState.showSnackBar(snackBar);
+  }
 
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text("My title"),
-      content: Text("This is my message."),
-      actions: [
-        okButton,
-      ],
-    );
+  int getDecision(String age, String sex, String lung, String fever,
+      String cough, String sob, String pic, String cc, String tc) {
+    int travelState = 0;
+    int _breatheState = sob == "Yes" ? 1 : 0;
+    int _feverState = fever == "Yes" ? 1 : 0;
+    int _chestState = pic == "Yes" ? 1 : 0;
+    int _contactState = cc == "Yes" ? 1 : 0;
+    int _coughState = cough == "Yes" ? 1 : 0;
+    int _lungState = lung == "Yes" ? 1 : 0;
+    int _sexState = sex == "Male" ? 1 : 0;
 
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
+    print(_breatheState);
+    print(_feverState);
+    print(_chestState);
+    print(_contactState);
+    print(_coughState);
+    print(_sexState);
+    print(_lungState);
+
+    var countryMap = {
+      'china': 2,
+      'singapore': 8,
+      'usa': 3,
+      'south korea': 5,
+      'italy': 1,
+      'germany': 9,
+      'switzerland': 7,
+      'spain': 4,
+      'thailand': 6,
+      'egypt': 10,
+      'belgium': 11,
+      'lebanon': 12,
+      'iraq': 11,
+      'iran': 11,
+      'afganistan': 12,
+      'kuwait': 12,
+      'algeria': 12,
+      'austria': 12,
+      'nepal': 12,
+      'malaysia': 10,
+      'sri lanka': 12,
+      'india': 12,
+      'sweden': 10,
+      'canada': 10,
+      'netherlands': 12,
+      'brazil': 12,
+      'greece': 12,
+      'israel': 12,
+      'russia': 12,
+      'chile': 12,
+      'mexico': 12,
+      'belarus': 12,
+      'cyprus': 12,
+      'turkey': 12,
+      'honduras': 12,
+      'kenya': 12,
+      'uk': 10,
+      'costa rica': 12,
+      'armenia': 12,
+      'ecuador': 12,
+      'bosnia': 12,
+      'azerbaijan': 12,
+      'peru': 12,
+      'panama': 12,
+      'bulgeria': 12,
+      'portugal': 11
+    };
+    if (countryMap.containsKey(tc.toLowerCase())) {
+      travelState = countryMap[tc.toLowerCase()];
+    } else {
+      travelState = 0;
+    }
+
+    print(travelState);
+
+    if (1 - _breatheState <= 0.5) {
+      if (1 - _feverState <= 0.5) {
+        if (1 - _chestState <= 0.5) {
+          if (int.parse(age) <= 34.0) {
+            if (int.parse(age) <= 31.0) {
+              return 0;
+            } else {
+              return 2;
+            }
+          } else {
+            return 0;
+          }
+        } else {
+          if (1 - travelState <= 7.5) {
+            return 1;
+          } else {
+            if (1 - travelState <= 11.0) {
+              return 0;
+            } else {
+              return 2;
+            }
+          }
+        }
+      } else {
+        if (1 - _contactState <= 0.5) {
+          if (1 - _chestState <= 0.5) {
+            return 2;
+          } else {
+            if (1 - _coughState <= 0.5) {
+              return 2;
+            } else {
+              if (1 - _sexState <= 0.5) {
+                return 2;
+              } else {
+                if (1 - _lungState <= 0.5) {
+                  return 1;
+                } else {
+                  return 2;
+                }
+              }
+            }
+          }
+        } else {
+          return 1;
+        }
+      }
+    } else {
+      if (1 - _contactState <= 0.5) {
+        if (1 - _chestState <= 0.5) {
+          if (int.parse(age) <= 65.5) {
+            if (1 - _feverState <= 0.5) {
+              return 2;
+            } else {
+              if (int.parse(age) <= 31.0) {
+                if (int.parse(age) <= 27.0) {
+                  return 1;
+                } else {
+                  return 2;
+                }
+              } else {
+                return 1;
+              }
+            }
+          } else {
+            if (travelState <= 10.5) {
+              return 2;
+            } else {
+              return 1;
+            }
+          }
+        } else {
+          if (int.parse(age) <= 37.0) {
+            if (1 - _lungState <= 0.5) {
+              return 2;
+            } else {
+              return 1;
+            }
+          } else {
+            return 1;
+          }
+        }
+      } else {
+        return 1;
+      }
+    }
+  }
+
+  int decision = 0;
+
+  Future navigateToPrdictPage(context) async {
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => PredictionPage(decision)));
   }
 
   Widget submit() {
@@ -766,7 +911,8 @@ class QuestionCardState extends State<QuestionCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text('Submit Your Response',
+                    Text('Submit Your Response \n and please wait for result',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,
@@ -778,21 +924,34 @@ class QuestionCardState extends State<QuestionCard> {
                           borderRadius: new BorderRadius.circular(25.0),
                           side: BorderSide(color: Colors.blueAccent, width: 2)),
                       onPressed: () {
+                        decision = getDecision(
+                            widget.feedbackForm.age,
+                            widget.feedbackForm.sex,
+                            widget.feedbackForm.lungdisease,
+                            widget.feedbackForm.fever,
+                            widget.feedbackForm.cough,
+                            widget.feedbackForm.shortnessofbreathe,
+                            widget.feedbackForm.pressureinthechest,
+                            widget.feedbackForm.closecontactwithcoronapatient,
+                            widget.feedbackForm.traveledcountry);
+
                         FormController formController =
                             FormController((String response) {
                           print("Response: $response");
                           if (response == FormController.STATUS_SUCCESS) {
                             // Feedback is saved succesfully in Google Sheets.
-                            print(widget.scaffoldKey);
+                            _showSnackbar("Feedback Submitted");
+                            navigateToPrdictPage(context);
                           } else {
                             // Error Occurred while saving data in Google Sheets.
-                            print("Error Occurred!");
+                            _showSnackbar(
+                                "Error Occured during Submission. Please try again.");
+                            Navigator.pop(context);
                           }
                         });
 
                         // Submit 'feedbackForm' and save it in Google Sheets.
                         formController.submitForm(widget.feedbackForm);
-                        Navigator.pop(context);
                       },
                       child: Container(
                           height: 50,

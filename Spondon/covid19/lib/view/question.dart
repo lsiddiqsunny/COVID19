@@ -35,7 +35,7 @@ class QuestionScreenState extends State<QuestionScreen> {
     return Scaffold(
         resizeToAvoidBottomPadding: false ,
         key: scaffoldKey,
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.blue.withOpacity(0.25),
         body: Container(
             child: Center(
                 child: PageView.builder(
