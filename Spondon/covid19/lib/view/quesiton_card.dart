@@ -1,8 +1,12 @@
+import 'package:covid19/controller/form_controller.dart';
+import 'package:covid19/model/form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
+import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 
 class QuestionCard extends StatefulWidget {
+  final FeedbackForm feedbackForm;
   final String type;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final PageController controller;
@@ -10,6 +14,7 @@ class QuestionCard extends StatefulWidget {
   final _kCurve = Curves.decelerate;
 
   QuestionCard({
+    @required this.feedbackForm,
     @required this.type,
     @required this.scaffoldKey,
     @required this.controller,
@@ -25,10 +30,53 @@ class QuestionCardState extends State<QuestionCard> {
   String _selectedAge;
   String _selectedGender;
   String _heart;
+  String _lung;
+  String _diabetes;
+  String _fever;
+  String _cough;
+  String _sob;
+  String _pic;
+  String _cc;
+  String _tc;
 
   @override
   void initState() {
     super.initState();
+  }
+
+  final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+
+  Position _currentPosition;
+  String _currentAddress = 'Bangladesh';
+
+  void _getCurrentLocation() {
+    geolocator
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      setState(() {
+        _currentPosition = position;
+      });
+
+      _getAddressFromLatLng();
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
+  _getAddressFromLatLng() async {
+    try {
+      List<Placemark> p = await geolocator.placemarkFromCoordinates(
+          _currentPosition.latitude, _currentPosition.longitude);
+
+      Placemark place = p[0];
+
+      setState(() {
+        _currentAddress =
+            "${place.subLocality}, ${place.locality}, ${place.postalCode}";
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   List<String> countries = [
@@ -311,6 +359,8 @@ class QuestionCardState extends State<QuestionCard> {
         onChanged: (newValue) {
           setState(() {
             _selectedAge = newValue;
+            widget.feedbackForm.age = _selectedAge;
+            print(widget.feedbackForm.toParams());
           });
         },
       )
@@ -342,6 +392,8 @@ class QuestionCardState extends State<QuestionCard> {
         onChanged: (newValue) {
           setState(() {
             _selectedGender = newValue;
+            widget.feedbackForm.sex = _selectedGender;
+            print(widget.feedbackForm.toParams());
           });
         },
       )
@@ -376,6 +428,8 @@ class QuestionCardState extends State<QuestionCard> {
           onChanged: (newValue) {
             setState(() {
               _heart = newValue;
+              widget.feedbackForm.heartdisease = _heart;
+              print(widget.feedbackForm.heartdisease);
             });
           },
         )
@@ -391,7 +445,7 @@ class QuestionCardState extends State<QuestionCard> {
       children: <Widget>[
         Text('Do you have lung disease?'),
         new DropdownButton<String>(
-          value: _heart,
+          value: _lung,
           hint: Text(
             'Select yes/no',
             style: TextStyle(fontSize: 20),
@@ -410,7 +464,9 @@ class QuestionCardState extends State<QuestionCard> {
           }).toList(),
           onChanged: (newValue) {
             setState(() {
-              _heart = newValue;
+              _lung = newValue;
+              widget.feedbackForm.lungdisease = _lung;
+              print(widget.feedbackForm.toParams());
             });
           },
         )
@@ -426,7 +482,7 @@ class QuestionCardState extends State<QuestionCard> {
       children: <Widget>[
         Text('Do you have diabetes?'),
         new DropdownButton<String>(
-          value: _heart,
+          value: _diabetes,
           hint: Text(
             'Select yes/no',
             style: TextStyle(fontSize: 20),
@@ -445,7 +501,8 @@ class QuestionCardState extends State<QuestionCard> {
           }).toList(),
           onChanged: (newValue) {
             setState(() {
-              _heart = newValue;
+              _diabetes = newValue;
+              widget.feedbackForm.diabetes = _diabetes;
             });
           },
         )
@@ -461,7 +518,7 @@ class QuestionCardState extends State<QuestionCard> {
       children: <Widget>[
         Text('Do you have fever?'),
         new DropdownButton<String>(
-          value: _heart,
+          value: _fever,
           hint: Text(
             'Select yes/no',
             style: TextStyle(fontSize: 20),
@@ -480,7 +537,8 @@ class QuestionCardState extends State<QuestionCard> {
           }).toList(),
           onChanged: (newValue) {
             setState(() {
-              _heart = newValue;
+              _fever = newValue;
+              widget.feedbackForm.fever = _fever;
             });
           },
         )
@@ -496,7 +554,7 @@ class QuestionCardState extends State<QuestionCard> {
       children: <Widget>[
         Text('Do you have cough?'),
         new DropdownButton<String>(
-          value: _heart,
+          value: _cough,
           hint: Text(
             'Select yes/no',
             style: TextStyle(fontSize: 20),
@@ -515,7 +573,8 @@ class QuestionCardState extends State<QuestionCard> {
           }).toList(),
           onChanged: (newValue) {
             setState(() {
-              _heart = newValue;
+              _cough = newValue;
+              widget.feedbackForm.cough = _cough;
             });
           },
         )
@@ -531,7 +590,7 @@ class QuestionCardState extends State<QuestionCard> {
       children: <Widget>[
         Text('Do you have shortness of breath?'),
         new DropdownButton<String>(
-          value: _heart,
+          value: _sob,
           hint: Text(
             'Select yes/no',
             style: TextStyle(fontSize: 20),
@@ -550,7 +609,8 @@ class QuestionCardState extends State<QuestionCard> {
           }).toList(),
           onChanged: (newValue) {
             setState(() {
-              _heart = newValue;
+              _sob = newValue;
+              widget.feedbackForm.shortnessofbreathe = _sob;
             });
           },
         )
@@ -566,7 +626,7 @@ class QuestionCardState extends State<QuestionCard> {
       children: <Widget>[
         Text('Do you have pressure in chest?'),
         new DropdownButton<String>(
-          value: _heart,
+          value: _pic,
           hint: Text(
             'Select yes/no',
             style: TextStyle(fontSize: 20),
@@ -585,7 +645,8 @@ class QuestionCardState extends State<QuestionCard> {
           }).toList(),
           onChanged: (newValue) {
             setState(() {
-              _heart = newValue;
+              _pic = newValue;
+              widget.feedbackForm.pressureinthechest = _pic;
             });
           },
         )
@@ -593,7 +654,110 @@ class QuestionCardState extends State<QuestionCard> {
     );
   }
 
+  Widget cc() {
+    List<String> submit = ['Yes', 'No'];
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Text(
+          'Did you have close contact\n with corona patient?',
+          textAlign: TextAlign.center,
+        ),
+        new DropdownButton<String>(
+          value: _cc,
+          hint: Text(
+            'Select yes/no',
+            style: TextStyle(fontSize: 20),
+          ),
+          items: submit.map((String value) {
+            return new DropdownMenuItem<String>(
+              value: value,
+              child: new Text(
+                value,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 25,
+                ),
+              ),
+            );
+          }).toList(),
+          onChanged: (newValue) {
+            setState(() {
+              _cc = newValue;
+              widget.feedbackForm.closecontactwithcoronapatient = _cc;
+            });
+          },
+        )
+      ],
+    );
+  }
+
+  Widget tc() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Text(
+          'Have you been outside\n of the country?',
+          textAlign: TextAlign.center,
+        ),
+        new DropdownButton<String>(
+          value: _tc,
+          hint: Text(
+            'Select country',
+            style: TextStyle(fontSize: 15),
+          ),
+          items: countries.map((String value) {
+            return new DropdownMenuItem<String>(
+              value: value,
+              child: new Text(
+                value,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 10,
+                ),
+              ),
+            );
+          }).toList(),
+          onChanged: (newValue) {
+            setState(() {
+              _tc = newValue;
+              widget.feedbackForm.traveledcountry = _tc;
+            });
+          },
+        )
+      ],
+    );
+  }
+
+  showAlertDialog(BuildContext context) {
+    // set up the button
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () {},
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("My title"),
+      content: Text("This is my message."),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   Widget submit() {
+    _getCurrentLocation();
+
     return Container(
       child: Center(
           child: Container(
@@ -614,6 +778,20 @@ class QuestionCardState extends State<QuestionCard> {
                           borderRadius: new BorderRadius.circular(25.0),
                           side: BorderSide(color: Colors.blueAccent, width: 2)),
                       onPressed: () {
+                        FormController formController =
+                            FormController((String response) {
+                          print("Response: $response");
+                          if (response == FormController.STATUS_SUCCESS) {
+                            // Feedback is saved succesfully in Google Sheets.
+                            print(widget.scaffoldKey);
+                          } else {
+                            // Error Occurred while saving data in Google Sheets.
+                            print("Error Occurred!");
+                          }
+                        });
+
+                        // Submit 'feedbackForm' and save it in Google Sheets.
+                        formController.submitForm(widget.feedbackForm);
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -644,80 +822,6 @@ class QuestionCardState extends State<QuestionCard> {
                       new BorderRadius.all(const Radius.circular(50.0))),
               height: MediaQuery.of(context).size.height * .5,
               width: MediaQuery.of(context).size.width * .8)),
-    );
-  }
-
-  Widget cc() {
-    List<String> submit = ['Yes', 'No'];
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Text(
-          'Did you have close contact\n with corona patient?',
-          textAlign: TextAlign.center,
-        ),
-        new DropdownButton<String>(
-          value: _heart,
-          hint: Text(
-            'Select yes/no',
-            style: TextStyle(fontSize: 20),
-          ),
-          items: submit.map((String value) {
-            return new DropdownMenuItem<String>(
-              value: value,
-              child: new Text(
-                value,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            );
-          }).toList(),
-          onChanged: (newValue) {
-            setState(() {
-              _heart = newValue;
-            });
-          },
-        )
-      ],
-    );
-  }
-
-  Widget tc() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Text(
-          'Have you been outside\n of the country?',
-          textAlign: TextAlign.center,
-        ),
-        new DropdownButton<String>(
-          value: _heart,
-          hint: Text(
-            'Select country',
-            style: TextStyle(fontSize: 15),
-          ),
-          items: countries.map((String value) {
-            return new DropdownMenuItem<String>(
-              value: value,
-              child: new Text(
-                value,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 10,
-                ),
-              ),
-            );
-          }).toList(),
-          onChanged: (newValue) {
-            setState(() {
-              _heart = newValue;
-            });
-          },
-        )
-      ],
     );
   }
 

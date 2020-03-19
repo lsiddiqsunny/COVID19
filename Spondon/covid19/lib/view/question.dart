@@ -1,3 +1,4 @@
+import 'package:covid19/model/form.dart';
 import 'package:covid19/view/quesiton_card.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,9 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class QuestionScreenState extends State<QuestionScreen> {
+
+  FeedbackForm form = new FeedbackForm() ;
+
   PageController controller = PageController(keepPage: true);
   GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
   List<String> pageNames = [
@@ -45,6 +49,7 @@ class QuestionScreenState extends State<QuestionScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   QuestionCard(
+                    feedbackForm: form,
                     type: pageNames[index],
                     controller: controller,
                     scaffoldKey: scaffoldKey,
