@@ -45,6 +45,11 @@ class QuestionCardState extends State<QuestionCard> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
 
   Position _currentPosition;
@@ -80,6 +85,7 @@ class QuestionCardState extends State<QuestionCard> {
     }
   }
 
+  int flag = 1;
   List<String> countries = [
     'Afghanistan',
     'Åland Islands',
@@ -425,7 +431,7 @@ class QuestionCardState extends State<QuestionCard> {
             setState(() {
               _heart = newValue;
               widget.feedbackForm.heartdisease = _heart;
-              print(widget.feedbackForm.heartdisease);
+              print(widget.feedbackForm.toParams());
             });
           },
         )
@@ -719,6 +725,7 @@ class QuestionCardState extends State<QuestionCard> {
             setState(() {
               _tc = newValue;
               widget.feedbackForm.traveledcountry = _tc;
+              print(widget.feedbackForm.heartdisease);
             });
           },
         )
@@ -924,6 +931,10 @@ class QuestionCardState extends State<QuestionCard> {
                           borderRadius: new BorderRadius.circular(25.0),
                           side: BorderSide(color: Colors.blueAccent, width: 2)),
                       onPressed: () {
+                        setState(() {
+                          flag = 0;
+                        });
+                        print(flag);
                         decision = getDecision(
                             widget.feedbackForm.age,
                             widget.feedbackForm.sex,
@@ -940,6 +951,9 @@ class QuestionCardState extends State<QuestionCard> {
                           print("Response: $response");
                           if (response == FormController.STATUS_SUCCESS) {
                             // Feedback is saved succesfully in Google Sheets.
+                            setState(() {
+                              flag = 1;
+                            });
                             _showSnackbar("Feedback Submitted");
                             navigateToPrdictPage(context);
                           } else {
@@ -1062,43 +1076,148 @@ class QuestionCardState extends State<QuestionCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Stack(
-          children: <Widget>[
-            getWidgetByCatagory(),
-            Positioned(
-                bottom: MediaQuery.of(context).size.height * .07,
-                left: 0,
-                right: 0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    RaisedButton(
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(15.0),
-                        ),
-                        child: Text('Prev'),
-                        onPressed: () {
-                          widget.controller.previousPage(
-                              duration: widget._kDuration,
-                              curve: widget._kCurve);
-                        }),
-                    RaisedButton(
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(15.0),
-                      ),
-                      onPressed: () {
-                        widget.controller.nextPage(
-                            duration: widget._kDuration, curve: widget._kCurve);
-                      },
-                      child: Text('Next'),
-                    ),
-                  ],
-                ))
-          ],
-        ),
+        child: flag == 0
+            ? Container(
+                child: Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                  ),
+                ),
+              )
+            : Stack(
+                children: <Widget>[
+                  getWidgetByCatagory(),
+                  Positioned(
+                      bottom: MediaQuery.of(context).size.height * .07,
+                      left: 0,
+                      right: 0,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          
+                          RaisedButton(
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(15.0),
+                            ),
+                            onPressed: () {
+                              if (widget.type == 'age') {
+                                if (widget.feedbackForm.age == "Unspecified") {
+                                  _showSnackbar('Please Select age');
+                                } else {
+                                  widget.controller.nextPage(
+                                      duration: widget._kDuration,
+                                      curve: widget._kCurve);
+                                }
+                              }
+
+                              else if (widget.type == 'sex') {
+                                if (widget.feedbackForm.sex == "Unspecified") {
+                                  _showSnackbar('Please Select Gender');
+                                } else {
+                                  widget.controller.nextPage(
+                                      duration: widget._kDuration,
+                                      curve: widget._kCurve);
+                                }
+                              }
+
+                              else if (widget.type == 'hd') {
+                                if (widget.feedbackForm.heartdisease == "Unspecified") {
+                                  _showSnackbar('Please Select An Option');
+                                } else {
+                                  widget.controller.nextPage(
+                                      duration: widget._kDuration,
+                                      curve: widget._kCurve);
+                                }
+                              }
+
+                              else if (widget.type == 'ld') {
+                                if (widget.feedbackForm.lungdisease == "Unspecified") {
+                                  _showSnackbar('Please Select An Option');
+                                } else {
+                                  widget.controller.nextPage(
+                                      duration: widget._kDuration,
+                                      curve: widget._kCurve);
+                                }
+                              }
+
+                              else if (widget.type == 'db') {
+                                if (widget.feedbackForm.diabetes == "Unspecified") {
+                                  _showSnackbar('Please Select An Option');
+                                } else {
+                                  widget.controller.nextPage(
+                                      duration: widget._kDuration,
+                                      curve: widget._kCurve);
+                                }
+                              }
+
+                              else if (widget.type == 'fever') {
+                                if (widget.feedbackForm.fever == "Unspecified") {
+                                  _showSnackbar('Please Select An Option');
+                                } else {
+                                  widget.controller.nextPage(
+                                      duration: widget._kDuration,
+                                      curve: widget._kCurve);
+                                }
+                              }
+
+                              else if (widget.type == 'cough') {
+                                if (widget.feedbackForm.cough == "Unspecified") {
+                                  _showSnackbar('Please Select An Option');
+                                } else {
+                                  widget.controller.nextPage(
+                                      duration: widget._kDuration,
+                                      curve: widget._kCurve);
+                                }
+                              }
+
+                              else if (widget.type == 'sob') {
+                                if (widget.feedbackForm.shortnessofbreathe == "Unspecified") {
+                                  _showSnackbar('Please Select An Option');
+                                } else {
+                                  widget.controller.nextPage(
+                                      duration: widget._kDuration,
+                                      curve: widget._kCurve);
+                                }
+                              }
+
+                              else if (widget.type == 'pic') {
+                                if (widget.feedbackForm.pressureinthechest == "Unspecified") {
+                                  _showSnackbar('Please Select An Option');
+                                } else {
+                                  widget.controller.nextPage(
+                                      duration: widget._kDuration,
+                                      curve: widget._kCurve);
+                                }
+                              }
+
+                              else if (widget.type == 'cc') {
+                                if (widget.feedbackForm.closecontactwithcoronapatient == "Unspecified") {
+                                  _showSnackbar('Please Select An Option');
+                                } else {
+                                  widget.controller.nextPage(
+                                      duration: widget._kDuration,
+                                      curve: widget._kCurve);
+                                }
+                              }
+
+                              else {
+                                if (widget.feedbackForm.traveledcountry == "Unspecified") {
+                                  _showSnackbar('Please Select An Option');
+                                } else {
+                                  widget.controller.nextPage(
+                                      duration: widget._kDuration,
+                                      curve: widget._kCurve);
+                                }
+                              }
+                            },
+                            child: Text('Next'),
+                          ),
+                        ],
+                      ))
+                ],
+              ),
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: new BorderRadius.all(const Radius.circular(35.0))),
@@ -1106,32 +1225,3 @@ class QuestionCardState extends State<QuestionCard> {
         width: MediaQuery.of(context).size.width * .8);
   }
 }
-
-/*
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                RaisedButton(
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(15.0),
-                    ),
-                    child: Text('Prev'),
-                    onPressed: () {
-                      widget.controller.previousPage(
-                          duration: widget._kDuration, curve: widget._kCurve);
-                    }),
-                RaisedButton(
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(15.0),
-                  ),
-                  onPressed: () {
-                    widget.controller.nextPage(
-                        duration: widget._kDuration, curve: widget._kCurve);
-                  },
-                  child: Text('Next'),
-                ),
-              ],
-            )*/

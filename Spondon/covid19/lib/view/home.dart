@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -11,8 +12,34 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  Future<void> _launched;
+  String _phone = '';
+
+  Future<void> _launchInBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: false,
+        headers: <String, String>{'my_header_key': 'my_header_value'},
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Widget _launchStatus(BuildContext context, AsyncSnapshot<void> snapshot) {
+    if (snapshot.hasError) {
+      return Text('Error: ${snapshot.error}');
+    } else {
+      return const Text('');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    const String toLaunch = 'https://www.worldometers.info/coronavirus/';
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Colors.white,
@@ -58,7 +85,12 @@ class HomeScreenState extends State<HomeScreen> {
                 borderRadius: new BorderRadius.circular(15.0),
               ),
               elevation: 0,
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  _launched = _launchInBrowser(toLaunch);
+                });
+                FutureBuilder<void>(future: _launched, builder: _launchStatus);
+              },
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.30,
                 width: MediaQuery.of(context).size.width * 0.30,
@@ -106,7 +138,9 @@ class HomeScreenState extends State<HomeScreen> {
                 borderRadius: new BorderRadius.circular(15.0),
               ),
               elevation: 0,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/quarantine');
+              },
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.30,
                 width: MediaQuery.of(context).size.width * 0.30,

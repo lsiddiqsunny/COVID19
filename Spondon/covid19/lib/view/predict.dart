@@ -14,16 +14,64 @@ class PredictionPage extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext ctxt) {
-    return new Scaffold(
-        appBar: new AppBar(
-          title: new Text("Prediction"),
-        ),
-        body: Center(
-            child: new SingleChildScrollView(
-                child: Container(
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[Text(getDecison())])))));
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.blueAccent,
+      body: Container(
+        child: Center(
+            child: Container(
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        getDecison(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      RaisedButton(
+                        color: Colors.white,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(25.0),
+                            side:
+                                BorderSide(color: Colors.blueAccent, width: 2)),
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/home');
+                        },
+                        child: Container(
+                            height: 50,
+                            width: 80,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(
+                                  Icons.arrow_back_ios,
+                                  color: Colors.blueAccent,
+                                ),
+                                Text('Home',
+                                    style: TextStyle(
+                                      color: Colors.blueAccent,
+                                      fontSize: 17,
+                                    )),
+                              ],
+                            )),
+                      )
+                    ],
+                  ),
+                ),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius:
+                        new BorderRadius.all(const Radius.circular(50.0))),
+                height: MediaQuery.of(context).size.height * .5,
+                width: MediaQuery.of(context).size.width * .8)),
+      ),
+    );
   }
 }
