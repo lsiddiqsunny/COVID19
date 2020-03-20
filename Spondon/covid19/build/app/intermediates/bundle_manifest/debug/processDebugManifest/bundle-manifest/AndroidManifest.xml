@@ -31,6 +31,10 @@
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
         android:label="covid19" >
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAgoPwLg2MaDw_p4Z3DsITLrQ1DlevIbPA" />
+
         <activity
             android:name="com.example.covid19.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

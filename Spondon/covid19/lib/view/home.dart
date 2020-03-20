@@ -171,7 +171,7 @@ class HomeScreenState extends State<HomeScreen> {
                 width: MediaQuery.of(context).size.width * 0.30,
                 child: Center(
                   child: Text(
-                    'Contaminated Zones',
+                    'Quarantine Zones',
                     style: TextStyle(color: Colors.white),
                     textAlign: TextAlign.center,
                   ),
