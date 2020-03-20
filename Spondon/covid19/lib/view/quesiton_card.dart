@@ -760,51 +760,56 @@ class QuestionCardState extends State<QuestionCard> {
 
     var countryMap = {
       'china': 2,
-      'singapore': 8,
-      'usa': 3,
-      'south korea': 5,
-      'italy': 1,
-      'germany': 9,
-      'switzerland': 7,
-      'spain': 4,
-      'thailand': 6,
-      'egypt': 10,
-      'belgium': 11,
-      'lebanon': 12,
-      'iraq': 11,
-      'iran': 11,
-      'afganistan': 12,
-      'kuwait': 12,
-      'algeria': 12,
-      'austria': 12,
-      'nepal': 12,
-      'malaysia': 10,
-      'sri lanka': 12,
-      'india': 12,
-      'sweden': 10,
-      'canada': 10,
-      'netherlands': 12,
-      'brazil': 12,
-      'greece': 12,
-      'israel': 12,
-      'russia': 12,
-      'chile': 12,
-      'mexico': 12,
-      'belarus': 12,
-      'cyprus': 12,
-      'turkey': 12,
-      'honduras': 12,
-      'kenya': 12,
-      'uk': 10,
-      'costa rica': 12,
-      'armenia': 12,
-      'ecuador': 12,
-      'bosnia': 12,
-      'azerbaijan': 12,
-      'peru': 12,
-      'panama': 12,
-      'bulgeria': 12,
-      'portugal': 11
+      'singapore': 2,
+      'usa': 2,
+      'south korea': 1,
+      'italy': 2,
+      'germany': 2,
+      'switzerland': 1,
+      'spain': 2,
+      'thailand': 2,
+      'egypt': 1,
+      'belgium': 1,
+      'lebanon': 1,
+      'iraq': 1,
+      'iran': 2,
+      'afganistan': 1,
+      'kuwait': 2,
+      'algeria': 1,
+      'austria': 1,
+      'nepal': 1,
+      'malaysia': 2,
+      'sri lanka': 1,
+      'india': 1,
+      'sweden': 1,
+      'canada': 1,
+      'netherlands': 1,
+      'brazil': 1,
+      'greece': 1,
+      'israel': 1,
+      'russia': 1,
+      'chile': 1,
+      'mexico': 1,
+      'belarus': 1,
+      'cyprus': 1,
+      'turkey': 1,
+      'honduras': 1,
+      'kenya': 1,
+      'uk': 2,
+      'costa rica': 1,
+      'armenia': 1,
+      'ecuador': 1,
+      'bosnia': 1,
+      'azerbaijan': 1,
+      'peru': 1,
+      'panama': 1,
+      'bulgeria': 1,
+      'portugal': 1,
+      'sindh': 2,
+      'taftan': 2,
+      'saudia srabia':2,
+      'dubai':2,
+
     };
     if (countryMap.containsKey(tc.toLowerCase())) {
       travelState = countryMap[tc.toLowerCase()];
@@ -813,7 +818,37 @@ class QuestionCardState extends State<QuestionCard> {
     }
 
     print(travelState);
+    int score=travelState;
+    if(_breatheState==1){
+      score+=1;
+    }
+    if(_feverState==1){
+      score+=1;
+    }
+    if(_coughState==1){
+      score+=1;
+    }
+    if(_contactState==1){
+      score+=3;
+    }
+    if(_lungState==1){
+      score+=1;
+    }
+    if(_chestState==1){
+      score+=1;
+    }
+    if(score<=3){
+      return -1;
+    }
+    else if(score>=3 && score<=4){
+      return 0;
+    }
+    else if(score>=5 && score<=6){
+      return 2;
+    }
+    else return 1;
 
+/*
     if (1 - _breatheState <= 0.5) {
       if (1 - _feverState <= 0.5) {
         if (1 - _chestState <= 0.5) {
@@ -898,7 +933,7 @@ class QuestionCardState extends State<QuestionCard> {
       } else {
         return 1;
       }
-    }
+    }*/
   }
 
   int decision = 0;
