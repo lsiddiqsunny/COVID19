@@ -4,6 +4,9 @@ class PredictionPage extends StatelessWidget {
   final int disease;
   PredictionPage(this.disease);
   String getDecison() {
+    if(disease==-1){
+      return "You may not have any disease.Stay safe!";
+    }
     if (disease == 0) {
       return "You may be cold fever. Contact Doctor";
     } else if (disease == 1) {
