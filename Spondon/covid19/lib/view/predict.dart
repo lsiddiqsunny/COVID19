@@ -7,7 +7,7 @@ class PredictionPage extends StatelessWidget {
     if(disease==-1){
       return "You may not have any disease.Stay safe!";
     }
-    if (disease == 0) {
+    else if (disease == 0) {
       return "You may be cold fever. Contact Doctor";
     } else if (disease == 1) {
       return "You may have corona. Contact doctor ASAP.";
