@@ -21,11 +21,22 @@ class WelcomeScreenState extends State<WelcomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'CoVID 19',
+                        'অবগত',
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 30,
                             fontWeight: FontWeight.bold),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          ' This app is made for the general awareness of people about covid 19 and its current situation in Bangladesh. \nSo we will encourage not to input any wrong information \nso that everyone can be aware of the actual situation and ensure their safety',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500),
+                        ),
                       ),
                       RaisedButton(
                         color: Colors.white,

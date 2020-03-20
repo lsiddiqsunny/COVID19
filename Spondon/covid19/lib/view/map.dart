@@ -23,7 +23,7 @@ class MapPageState extends State<MapPage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text("Bangladesh COVID19"),
+        title: Text("Bangladesh Quarantine Zones"),
       ),
       body: Stack(
         children: <Widget>[

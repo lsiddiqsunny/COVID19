@@ -70,7 +70,7 @@ class HomeScreenState extends State<HomeScreen> {
                 child: Center(
                   child: Text(
                     'Submit Your Condition',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white,fontSize: 15),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -98,7 +98,7 @@ class HomeScreenState extends State<HomeScreen> {
                 child: Center(
                   child: Text(
                     'Worldwide Statistics',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white,fontSize: 18),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -123,7 +123,7 @@ class HomeScreenState extends State<HomeScreen> {
                 child: Center(
                   child: Text(
                     'Symptoms and Information',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white,fontSize: 18),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -148,7 +148,7 @@ class HomeScreenState extends State<HomeScreen> {
                 child: Center(
                   child: Text(
                     'Nearest Test Center',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white,fontSize: 18),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -173,7 +173,7 @@ class HomeScreenState extends State<HomeScreen> {
                 child: Center(
                   child: Text(
                     'Quarantine Zones',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white,fontSize: 18),
                     textAlign: TextAlign.center,
                   ),
                 ),
