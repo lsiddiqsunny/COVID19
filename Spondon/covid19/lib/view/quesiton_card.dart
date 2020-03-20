@@ -807,9 +807,8 @@ class QuestionCardState extends State<QuestionCard> {
       'portugal': 1,
       'sindh': 2,
       'taftan': 2,
-      'saudia srabia':2,
-      'dubai':2,
-
+      'saudia srabia': 2,
+      'dubai': 2,
     };
     if (countryMap.containsKey(tc.toLowerCase())) {
       travelState = countryMap[tc.toLowerCase()];
@@ -818,35 +817,33 @@ class QuestionCardState extends State<QuestionCard> {
     }
 
     print(travelState);
-    int score=travelState;
-    if(_breatheState==1){
-      score+=1;
+    int score = travelState;
+    if (_breatheState == 1) {
+      score += 1;
     }
-    if(_feverState==1){
-      score+=1;
+    if (_feverState == 1) {
+      score += 1;
     }
-    if(_coughState==1){
-      score+=1;
+    if (_coughState == 1) {
+      score += 1;
     }
-    if(_contactState==1){
-      score+=3;
+    if (_contactState == 1) {
+      score += 3;
     }
-    if(_lungState==1){
-      score+=1;
+    if (_lungState == 1) {
+      score += 1;
     }
-    if(_chestState==1){
-      score+=1;
+    if (_chestState == 1) {
+      score += 1;
     }
-    if(score<=3){
+    if (score <= 3) {
       return -1;
-    }
-    else if(score>=3 && score<=4){
+    } else if (score >= 3 && score <= 4) {
       return 0;
-    }
-    else if(score>=5 && score<=6){
+    } else if (score >= 5 && score <= 6) {
       return 2;
-    }
-    else return 1;
+    } else
+      return 1;
 
 /*
     if (1 - _breatheState <= 0.5) {
@@ -986,9 +983,12 @@ class QuestionCardState extends State<QuestionCard> {
                             FormController((String response) {
                           print("Response: $response");
                           if (response == FormController.STATUS_SUCCESS) {
+                            setState(() {
+                              flag = 1;
+                            });
+                            _showSnackbar("Submission Successful");
                             // Feedback is saved succesfully in Google Sheets.
                             //_showSnackbar("Feedback Submitted");
-                            navigateToPrdictPage(context);
                           } else {
                             // Error Occurred while saving data in Google Sheets.
                             _showSnackbar(
@@ -999,6 +999,7 @@ class QuestionCardState extends State<QuestionCard> {
 
                         // Submit 'feedbackForm' and save it in Google Sheets.
                         formController.submitForm(widget.feedbackForm);
+                        navigateToPrdictPage(context);
                       },
                       child: Container(
                           height: 50,
@@ -1124,131 +1125,136 @@ class QuestionCardState extends State<QuestionCard> {
                       bottom: MediaQuery.of(context).size.height * .07,
                       left: 0,
                       right: 0,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          
-                          RaisedButton(
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(15.0),
-                            ),
-                            onPressed: () {
-                              if (widget.type == 'age') {
-                                if (widget.feedbackForm.age == "Unspecified") {
-                                  _showSnackbar('Please Select age');
-                                } else {
-                                  widget.controller.nextPage(
-                                      duration: widget._kDuration,
-                                      curve: widget._kCurve);
-                                }
-                              }
-
-                              else if (widget.type == 'sex') {
-                                if (widget.feedbackForm.sex == "Unspecified") {
-                                  _showSnackbar('Please Select Gender');
-                                } else {
-                                  widget.controller.nextPage(
-                                      duration: widget._kDuration,
-                                      curve: widget._kCurve);
-                                }
-                              }
-
-                              else if (widget.type == 'hd') {
-                                if (widget.feedbackForm.heartdisease == "Unspecified") {
-                                  _showSnackbar('Please Select An Option');
-                                } else {
-                                  widget.controller.nextPage(
-                                      duration: widget._kDuration,
-                                      curve: widget._kCurve);
-                                }
-                              }
-
-                              else if (widget.type == 'ld') {
-                                if (widget.feedbackForm.lungdisease == "Unspecified") {
-                                  _showSnackbar('Please Select An Option');
-                                } else {
-                                  widget.controller.nextPage(
-                                      duration: widget._kDuration,
-                                      curve: widget._kCurve);
-                                }
-                              }
-
-                              else if (widget.type == 'db') {
-                                if (widget.feedbackForm.diabetes == "Unspecified") {
-                                  _showSnackbar('Please Select An Option');
-                                } else {
-                                  widget.controller.nextPage(
-                                      duration: widget._kDuration,
-                                      curve: widget._kCurve);
-                                }
-                              }
-
-                              else if (widget.type == 'fever') {
-                                if (widget.feedbackForm.fever == "Unspecified") {
-                                  _showSnackbar('Please Select An Option');
-                                } else {
-                                  widget.controller.nextPage(
-                                      duration: widget._kDuration,
-                                      curve: widget._kCurve);
-                                }
-                              }
-
-                              else if (widget.type == 'cough') {
-                                if (widget.feedbackForm.cough == "Unspecified") {
-                                  _showSnackbar('Please Select An Option');
-                                } else {
-                                  widget.controller.nextPage(
-                                      duration: widget._kDuration,
-                                      curve: widget._kCurve);
-                                }
-                              }
-
-                              else if (widget.type == 'sob') {
-                                if (widget.feedbackForm.shortnessofbreathe == "Unspecified") {
-                                  _showSnackbar('Please Select An Option');
-                                } else {
-                                  widget.controller.nextPage(
-                                      duration: widget._kDuration,
-                                      curve: widget._kCurve);
-                                }
-                              }
-
-                              else if (widget.type == 'pic') {
-                                if (widget.feedbackForm.pressureinthechest == "Unspecified") {
-                                  _showSnackbar('Please Select An Option');
-                                } else {
-                                  widget.controller.nextPage(
-                                      duration: widget._kDuration,
-                                      curve: widget._kCurve);
-                                }
-                              }
-
-                              else if (widget.type == 'cc') {
-                                if (widget.feedbackForm.closecontactwithcoronapatient == "Unspecified") {
-                                  _showSnackbar('Please Select An Option');
-                                } else {
-                                  widget.controller.nextPage(
-                                      duration: widget._kDuration,
-                                      curve: widget._kCurve);
-                                }
-                              }
-
-                              else {
-                                if (widget.feedbackForm.traveledcountry == "Unspecified") {
-                                  _showSnackbar('Please Select An Option');
-                                } else {
-                                  widget.controller.nextPage(
-                                      duration: widget._kDuration,
-                                      curve: widget._kCurve);
-                                }
-                              }
-                            },
-                            child: Text('Next'),
-                          ),
-                        ],
-                      ))
+                      child: widget.type == "submit"
+                          ? Container()
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                RaisedButton(
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        new BorderRadius.circular(15.0),
+                                  ),
+                                  onPressed: () {
+                                    if (widget.type == 'age') {
+                                      if (widget.feedbackForm.age ==
+                                          "Unspecified") {
+                                        _showSnackbar('Please Select age');
+                                      } else {
+                                        widget.controller.nextPage(
+                                            duration: widget._kDuration,
+                                            curve: widget._kCurve);
+                                      }
+                                    } else if (widget.type == 'sex') {
+                                      if (widget.feedbackForm.sex ==
+                                          "Unspecified") {
+                                        _showSnackbar('Please Select Gender');
+                                      } else {
+                                        widget.controller.nextPage(
+                                            duration: widget._kDuration,
+                                            curve: widget._kCurve);
+                                      }
+                                    } else if (widget.type == 'hd') {
+                                      if (widget.feedbackForm.heartdisease ==
+                                          "Unspecified") {
+                                        _showSnackbar(
+                                            'Please Select An Option');
+                                      } else {
+                                        widget.controller.nextPage(
+                                            duration: widget._kDuration,
+                                            curve: widget._kCurve);
+                                      }
+                                    } else if (widget.type == 'ld') {
+                                      if (widget.feedbackForm.lungdisease ==
+                                          "Unspecified") {
+                                        _showSnackbar(
+                                            'Please Select An Option');
+                                      } else {
+                                        widget.controller.nextPage(
+                                            duration: widget._kDuration,
+                                            curve: widget._kCurve);
+                                      }
+                                    } else if (widget.type == 'db') {
+                                      if (widget.feedbackForm.diabetes ==
+                                          "Unspecified") {
+                                        _showSnackbar(
+                                            'Please Select An Option');
+                                      } else {
+                                        widget.controller.nextPage(
+                                            duration: widget._kDuration,
+                                            curve: widget._kCurve);
+                                      }
+                                    } else if (widget.type == 'fever') {
+                                      if (widget.feedbackForm.fever ==
+                                          "Unspecified") {
+                                        _showSnackbar(
+                                            'Please Select An Option');
+                                      } else {
+                                        widget.controller.nextPage(
+                                            duration: widget._kDuration,
+                                            curve: widget._kCurve);
+                                      }
+                                    } else if (widget.type == 'cough') {
+                                      if (widget.feedbackForm.cough ==
+                                          "Unspecified") {
+                                        _showSnackbar(
+                                            'Please Select An Option');
+                                      } else {
+                                        widget.controller.nextPage(
+                                            duration: widget._kDuration,
+                                            curve: widget._kCurve);
+                                      }
+                                    } else if (widget.type == 'sob') {
+                                      if (widget.feedbackForm
+                                              .shortnessofbreathe ==
+                                          "Unspecified") {
+                                        _showSnackbar(
+                                            'Please Select An Option');
+                                      } else {
+                                        widget.controller.nextPage(
+                                            duration: widget._kDuration,
+                                            curve: widget._kCurve);
+                                      }
+                                    } else if (widget.type == 'pic') {
+                                      if (widget.feedbackForm
+                                              .pressureinthechest ==
+                                          "Unspecified") {
+                                        _showSnackbar(
+                                            'Please Select An Option');
+                                      } else {
+                                        widget.controller.nextPage(
+                                            duration: widget._kDuration,
+                                            curve: widget._kCurve);
+                                      }
+                                    } else if (widget.type == 'cc') {
+                                      if (widget.feedbackForm
+                                              .closecontactwithcoronapatient ==
+                                          "Unspecified") {
+                                        _showSnackbar(
+                                            'Please Select An Option');
+                                      } else {
+                                        widget.controller.nextPage(
+                                            duration: widget._kDuration,
+                                            curve: widget._kCurve);
+                                      }
+                                    } else {
+                                      if (widget.feedbackForm.traveledcountry ==
+                                          "Unspecified") {
+                                        _showSnackbar(
+                                            'Please Select An Option');
+                                      } else {
+                                        widget.controller.nextPage(
+                                            duration: widget._kDuration,
+                                            curve: widget._kCurve);
+                                      }
+                                    }
+                                  },
+                                  child: Text('Next'),
+                                ),
+                              ],
+                            ))
                 ],
               ),
         decoration: BoxDecoration(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -181,6 +182,42 @@ class HomeScreenState extends State<HomeScreen> {
             top: MediaQuery.of(context).size.height * (0.255 + .325),
             right: MediaQuery.of(context).size.width * 0.1,
           ),
+          Positioned(
+            bottom: MediaQuery.of(context).size.height * 0.05,
+            left: MediaQuery.of(context).size.width * 0.15,
+              child: RaisedButton(
+            color: Colors.white,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(25.0),
+                side: BorderSide(color: Colors.blueAccent, width: 2)),
+            onPressed: () {
+              final RenderBox box = context.findRenderObject();
+              Share.share("text",
+                  subject: "subject",
+                  sharePositionOrigin:
+                      box.localToGlobal(Offset.zero) & box.size);
+              //Navigator.pop(context);
+            },
+            child: Container(
+                height: 50,
+                width: 80,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text('Share ',
+                        style: TextStyle(
+                          color: Colors.blueAccent,
+                          fontSize: 17,
+                        )),
+                    Icon(
+                      Icons.share,
+                      color: Colors.blueAccent,
+                    ),
+                  ],
+                )),
+          ))
         ],
       ),
     );
