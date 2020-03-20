@@ -87,6 +87,7 @@ class QuestionCardState extends State<QuestionCard> {
 
   int flag = 1;
   List<String> countries = [
+    'Not Applicable',
     'Afghanistan',
     'Åland Islands',
     'Albania',
@@ -951,10 +952,7 @@ class QuestionCardState extends State<QuestionCard> {
                           print("Response: $response");
                           if (response == FormController.STATUS_SUCCESS) {
                             // Feedback is saved succesfully in Google Sheets.
-                            setState(() {
-                              flag = 1;
-                            });
-                            _showSnackbar("Feedback Submitted");
+                            //_showSnackbar("Feedback Submitted");
                             navigateToPrdictPage(context);
                           } else {
                             // Error Occurred while saving data in Google Sheets.
@@ -969,7 +967,7 @@ class QuestionCardState extends State<QuestionCard> {
                       },
                       child: Container(
                           height: 50,
-                          width: 80,
+                          width: 90,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.center,

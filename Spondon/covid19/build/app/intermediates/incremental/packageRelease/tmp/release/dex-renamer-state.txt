@@ -1,0 +1,4 @@
+#Fri Mar 20 14:21:44 BDT 2020
+base.0=/home/shanjinur/Desktop/COVID19/Spondon/covid19/build/app/intermediates/transforms/r8/release/0/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

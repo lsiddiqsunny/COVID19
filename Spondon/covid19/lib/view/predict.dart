@@ -41,7 +41,7 @@ class PredictionPage extends StatelessWidget {
                             side:
                                 BorderSide(color: Colors.blueAccent, width: 2)),
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/home');
+                          Navigator.pop(context);
                         },
                         child: Container(
                             height: 50,
