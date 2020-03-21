@@ -9,7 +9,7 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class WelcomeScreenState extends State<WelcomeScreen> {
-  bool language = false ;
+  bool language = false;
   final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
 
   void _getCurrentLocation() {
@@ -79,7 +79,8 @@ class WelcomeScreenState extends State<WelcomeScreen> {
                                 BorderSide(color: Colors.blueAccent, width: 2)),
                         onPressed: () {
                           _getCurrentLocation();
-                          Navigator.pushReplacementNamed(context, '/home');
+                          Navigator.pushReplacementNamed(context, '/home',
+                              arguments: language);
                         },
                         child: Container(
                             height: 50,

@@ -51,7 +51,7 @@ class QuestionCardState extends State<QuestionCard> {
     super.dispose();
   }
 
-  final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+  final Geolocator geolocator = Geolocator() ;
 
   Position _currentPosition;
   String _currentAddress = 'Bangladesh';
