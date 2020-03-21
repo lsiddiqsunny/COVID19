@@ -1267,7 +1267,7 @@ class QuestionCardState extends State<QuestionCard> {
                             widget.feedbackForm.closecontactwithcoronapatient,
                             widget.feedbackForm.traveledcountry);
                         String disease="";
-                        if(decision==--1){
+                        if(decision==-1){
                           disease="Ok";
                         }
                         else if(disease==0){
