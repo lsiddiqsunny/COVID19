@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -8,7 +9,18 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class WelcomeScreenState extends State<WelcomeScreen> {
-  bool language = false;
+  bool language = false ;
+  final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+
+  void _getCurrentLocation() {
+    geolocator
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      print(position);
+    }).catchError((e) {
+      print(e);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +35,7 @@ class WelcomeScreenState extends State<WelcomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'অবগত',
+                        'CoVID 19',
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 30,
@@ -66,8 +78,8 @@ class WelcomeScreenState extends State<WelcomeScreen> {
                             side:
                                 BorderSide(color: Colors.blueAccent, width: 2)),
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/home',
-                              arguments: language);
+                          _getCurrentLocation();
+                          Navigator.pushReplacementNamed(context, '/home');
                         },
                         child: Container(
                             height: 50,

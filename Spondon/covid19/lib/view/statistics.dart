@@ -103,23 +103,7 @@ Map<String, double> dataMapAll = new Map();
                                       child: getChart(dataMap,[confirmedColor,recoveredColor,deathColor])
                                   ),
                                   SizedBox(height: 20,),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      _getItem(state.covidBdData.todayCases, "Today Confirmed"),
-                                      _getItem(state.covidBdData.todayDeaths, "Today Deaths"),
-                                      _getItem(state.covidBdData.deaths+state.covidBdData.recovered+state.covidBdData.cases,"Reported cases"),
-                                    ],
-                                  ),
-                                  SizedBox(height: 20,),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      _getItem(state.covidBdData.active, "Active Cases"),
-                                      _getItem(state.covidBdData.critical, "Critical Cases"),
-                                      _getItem(state.covidBdData.casesPerOneMillion,"Cases Per Million"),
-                                    ],
-                                  )
+
 
                                 ],
                               ),
@@ -176,12 +160,7 @@ Map<String, double> dataMapAll = new Map();
                                       alignment: Alignment.topCenter,
                                       child: getChart(dataMapAll,[confirmedColor,recoveredColor,deathColor])
                                   ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: <Widget>[
-                                      _getItem(state.allData.deaths+state.allData.recovered+state.allData.cases,"Total Cases"),
-                                    ],
-                                  ),
+
 
                                 ],
                               ),
