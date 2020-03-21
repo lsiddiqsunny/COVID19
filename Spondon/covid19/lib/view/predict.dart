@@ -1,23 +1,32 @@
 import 'package:flutter/material.dart';
 
 class PredictionPage extends StatelessWidget {
-  final int disease;
-  PredictionPage(this.disease);
-  String getDecison() {
-    if(disease==-1){
-      return "You may not have any disease.Stay safe!";
-    }
-    else if (disease == 0) {
-      return "You may be cold fever. Contact Doctor";
+  String getDecison(int disease, bool language) {
+    if (disease == -1) {
+      return language == false
+          ? "You may not have any disease.Stay safe!"
+          : "আপনার কোনও রোগ নাও থাকতে পারে নিরাপদে থাকুন!";
+    } else if (disease == 0) {
+      return language == false
+          ? "You may be cold fever. Contact Doctor"
+          : "আপনার ঠান্ডা জ্বর হতে পারে। আপনার ডক্টরের সাথে যোগাযোগ করা উচিত";
     } else if (disease == 1) {
-      return "You may have corona. Contact doctor ASAP.";
+      return language == false
+          ? "You may have corona. Contact doctor ASAP."
+          : "আপনার করোনা থাকতে পারে\nযত তাড়াতাড়ি সম্ভব ডাক্তারের সাথে যোগাযোগ করুন";
     } else {
-      return "You may be flu. Contact doctor";
+      return language == false
+          ? "You may be flu. Contact doctor"
+          : "আপনি ফ্লু হতে পারে। ডাক্তারের সাথে যোগাযোগ করুন";
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final List<Object> objects = ModalRoute.of(context).settings.arguments;
+    int disease = objects[0];
+    bool language = objects[1];
+
     return Scaffold(
       backgroundColor: Colors.blueAccent,
       body: Container(
@@ -29,7 +38,7 @@ class PredictionPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        getDecison(),
+                        getDecison(disease, language),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Colors.black,
@@ -48,7 +57,7 @@ class PredictionPage extends StatelessWidget {
                         },
                         child: Container(
                             height: 50,
-                            width: 80,
+                            width: 110,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,7 +66,7 @@ class PredictionPage extends StatelessWidget {
                                   Icons.arrow_back_ios,
                                   color: Colors.blueAccent,
                                 ),
-                                Text('Home',
+                                Text(language == false ? 'Home' : 'প্রধান পাতা',
                                     style: TextStyle(
                                       color: Colors.blueAccent,
                                       fontSize: 17,

@@ -10,8 +10,7 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class QuestionScreenState extends State<QuestionScreen> {
-
-  FeedbackForm form = new FeedbackForm() ;
+  FeedbackForm form = new FeedbackForm();
 
   PageController controller = PageController(keepPage: true);
   GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -32,8 +31,10 @@ class QuestionScreenState extends State<QuestionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final bool language = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
-        resizeToAvoidBottomPadding: false ,
+        resizeToAvoidBottomPadding: false,
         key: scaffoldKey,
         backgroundColor: Colors.blue.withOpacity(0.25),
         body: Container(
@@ -53,6 +54,7 @@ class QuestionScreenState extends State<QuestionScreen> {
                     type: pageNames[index],
                     controller: controller,
                     scaffoldKey: scaffoldKey,
+                    language: language,
                   )
                 ],
               ),

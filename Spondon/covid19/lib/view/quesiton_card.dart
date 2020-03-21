@@ -3,7 +3,6 @@ import 'package:covid19/model/form.dart';
 import 'package:covid19/view/predict.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 
 class QuestionCard extends StatefulWidget {
@@ -13,12 +12,14 @@ class QuestionCard extends StatefulWidget {
   final PageController controller;
   final _kDuration = const Duration(milliseconds: 300);
   final _kCurve = Curves.decelerate;
+  final bool language;
 
   QuestionCard({
     @required this.feedbackForm,
     @required this.type,
     @required this.scaffoldKey,
     @required this.controller,
+    @required this.language,
   });
 
   @override
@@ -333,90 +334,350 @@ class QuestionCardState extends State<QuestionCard> {
     'Zimbabwe',
   ];
 
-  Widget age() {
+  List<String> bangla_countries = [
+    'প্রযোজ্য নয়',
+    'আফগানিস্তান',
+    'এল্যান্ড দ্বীপপুঞ্জ',
+    'আলবেনিয়া',
+    'আলজেরিয়া',
+    'আমেরিকান সামোয়া',
+    'এ্যান্ডোরা',
+    'অ্যাঙ্গোলা',
+    'এ্যাঙ্গুইলা',
+    'এন্টার্কটিকা',
+    'অ্যান্টিগুয়া ও বার্বুডা',
+    'আর্জেন্টিনা',
+    'আর্মেনিয়া',
+    'আরুবা',
+    'অস্ট্রেলিয়া',
+    'অস্ট্রিয়া',
+    'আজারবাইজান',
+    'বাহামা',
+    'বাহরাইন',
+    'বাংলাদেশ',
+    'বার্বাডোস',
+    'বেলারুশ',
+    'বেলজিয়াম',
+    'বেলিজ',
+    'বেনিন',
+    'বারমুডা',
+    'ভুটান',
+    'বলিভিয়া',
+    'বনারে',
+    'বসনিয়া ও হার্জেগোভিনা',
+    'বতসোয়ানা',
+    'বুভেট আইল্যান্ড',
+    'ব্রাজিল',
+    'ব্রিটিশ ভারত মহাসাগর অঞ্চল',
+    'ব্রুনাই দারুসসালাম',
+    'বুলগেরিয়া',
+    'বুর্কিনা ফাসো',
+    'বুরুন্ডি',
+    'কাম্বোজ',
+    'ক্যামেরুন',
+    'কানাডা',
+    'কেপ ভার্দে',
+    'কেম্যান দ্বীপপুঞ্জ',
+    'মধ্য আফ্রিকান প্রজাতন্ত্র',
+    'চাদ',
+    'চিলি',
+    'চীন',
+    'ক্রিস্টমাস দ্বীপ',
+    'কোকোস (কিলিং) দ্বীপপুঞ্জ',
+    'কলম্বিয়া',
+    'কমোরোস',
+    'কঙ্গো',
+    ' "কঙ্গো',
+    'কুক দ্বীপপুঞ্জ',
+    'কোস্টারিকা',
+    'কোট ডি \' আইভায়ার ',
+    'ক্রোয়েশিয়া',
+    'কিউবা',
+    'কিউরাসাও',
+    'সাইপ্রাস',
+    'চেক প্রজাতন্ত্র',
+    'ডেনমার্ক',
+    'জিবুতি',
+    'ডোমিনিকা',
+    'ডোমিনিকান প্রজাতন্ত্র',
+    'ইকুয়েডর',
+    'মিশর',
+    'এল সালভাদর',
+    'নিরক্ষীয় গিনি',
+    'ইরিত্রিয়া',
+    'এস্তোনিয়া',
+    'ইথিওপিয়া',
+    'ফকল্যান্ড দ্বীপপুঞ্জ (মালভিনাস)',
+    'ফারো দ্বীপপুঞ্জ',
+    'ফিজি',
+    'ফিন্ল্যাণ্ড',
+    'ফ্রান্স',
+    'ফরাসি গায়ানা',
+    'ফরাসি পলিনেশিয়া',
+    'ফরাসি সাউদার্ন টেরিটোরিজ',
+    'গ্যাবন',
+    'গাম্বিয়া',
+    'জর্জিয়া',
+    'জার্মানি',
+    'ঘানা',
+    'জিব্রাল্টার',
+    'গ্রীস',
+    'গ্রীনল্যান্ড',
+    'গ্রেনাডা',
+    'গুয়াডেলোপ',
+    'গুয়াম',
+    'গুয়াতেমালা',
+    'গ্রাঞ্জি',
+    'গিনি',
+    'গিনি-বিসাউ',
+    'গায়ানা',
+    'হাইতি',
+    'হন্ডুরাস',
+    'হংকং',
+    'হাঙ্গেরি',
+    'আইসলণ্ড',
+    'ভারত',
+    'ইন্দোনেশিয়া',
+    'ইরান',
+    'ইরাক',
+    'আয়ারল্যান্ড',
+    'আইল অফ ম্যান',
+    'ইস্রায়েল',
+    'ইতালি',
+    'জামাইকা',
+    'জাপান',
+    'জার্সি',
+    'জর্ডান',
+    'কাজাকস্থান',
+    'কেনিয়া',
+    'কিরিবাতি',
+    'উত্তর কোরিয়া',
+    'দক্ষিণ কোরিয়া',
+    'কুয়েত',
+    'কিরগিজস্তান',
+    'লাও পিপলস ডেমোক্রেটিক রিপাবলিক',
+    'লাত্ভিয়া',
+    'লেবানন',
+    'লেসোথো',
+    'লাইবেরিয়া',
+    'লিবিয়া',
+    'লিচেনস্টেইন',
+    'লিত্ভা',
+    'লাক্সেমবার্গ',
+    'ম্যাকাও',
+    'ম্যাসাডোনিয়া',
+    'মাদাগাস্কার',
+    'মালাউই',
+    'মাল্যাশিয়া',
+    'মালদ্বীপের',
+    'মালি',
+    'মাল্টা',
+    'মার্শাল দ্বীপপুঞ্জ',
+    'মার্টিনিক',
+    'মরিতানিয়া',
+    'মরিশাস',
+    'মায়োত্তে',
+    'মেক্সিকো',
+    'মাইক্রোনেশিয়া',
+    'মোল্দাভিয়া',
+    'মোনাকো',
+    'মঙ্গোলিয়া',
+    'মন্টিনিগ্রো',
+    'মন্টসেরাট',
+    'মরক্কো',
+    'মোজাম্বিক',
+    'মায়ানমার',
+    'নামিবিয়া',
+    'নাউরু',
+    'নেপাল',
+    'নেদারল্যান্ডস',
+    'নতুন ক্যালেডোনিয়া',
+    'নিউজিল্যান্ড',
+    'নিকারাগুয়া',
+    'নাইজার',
+    'নাইজেরিয়া',
+    'নিউই',
+    'নরফোক দ্বীপ',
+    'উত্তর মারিয়ানা দ্বীপপুঞ্জ',
+    'নরওয়ে',
+    'ওমান',
+    'পাকিস্তান',
+    'পালাউ',
+    'ফিলিস্তিন',
+    'পানামা',
+    'পাপুয়া নিউ গিনি',
+    'প্যারাগুয়ে',
+    'পেরু',
+    'ফিলিপাইন',
+    'পিটকেয়ার্ন',
+    'পোল্যান্ড',
+    'পর্তুগাল',
+    'পুয়ের্তো রিকো',
+    'কাতার',
+    'রিইউনিয়ন',
+    'রুমানিয়া',
+    'রাশিয়ান ফেডারেশন',
+    'রুয়ান্ডা',
+    'সেন্ট বার্থলেমি',
+    'সেন্ট হেলেনা ',
+    'সেন্ট কিটস ও নেভিস',
+    'সেন্ট লুসিয়া',
+    'সেন্ট মার্টিন (ফরাসী অংশ)',
+    'সেন্ট পিয়েরি এবং মিকুয়েলন',
+    'সেন্ট ভিনসেন্ট ও গ্রেনাডাইন দ্বীপপুঞ্জ',
+    'সামোয়া',
+    'সান মারিনো',
+    'সাও টোমে এবং প্রিনসিপে',
+    'সৌদি আরব',
+    'সেনেগাল',
+    'সার্বিয়া',
+    'সিসিলি',
+    'সিয়েরা লিওন',
+    'সিঙ্গাপুর',
+    'সিন্ট মার্টেন (ডাচ অংশ)',
+    'শ্লোভাকিয়া',
+    'স্লোভানিয়া',
+    'সলোমান দ্বীপপুঞ্জ',
+    'সোমালিয়া',
+    'দক্ষিন আফ্রিকা',
+    'দক্ষিণ জর্জিয়া এবং দক্ষিণ স্যান্ডউইচ দ্বীপপুঞ্জ',
+    'দক্ষিণ সুদান',
+    'স্পেন',
+    'শ্রীলংকা',
+    'সুদান',
+    'সুরিনাম',
+    'সোয়ালবার্ড এবং জান মায়েন',
+    'সোয়াজিল্যান্ড',
+    'সুইডেন',
+    'সুইজারল্যান্ড',
+    'সিরিয় আরব প্রজাতন্ত্র',
+    'তাইওয়ান',
+    'তাজিকিস্তান',
+    'তাঞ্জানিয়া',
+    'থাইল্যান্ডের',
+    'পূর্ব তিমুর',
+    'যাও',
+    'টোকেলাউ',
+    'টোঙ্গা',
+    'ত্রিনিদাদ ও টোবাগো',
+    'টিউনিস্',
+    'তুরস্ক',
+    'তুর্কমেনিয়া',
+    'টার্কস্ ও কেইকোস দ্বীপপুঞ্জ',
+    'টুভালু',
+    'উগান্ডা',
+    'ইউক্রেইন',
+    'সংযুক্ত আরব আমিরাত',
+    'যুক্তরাজ্য',
+    'যুক্তরাষ্ট্র',
+    'মার্কিন যুক্তরাষ্ট্র ক্ষুদ্র ও পার্শ্ববর্তী দ্বীপপুঞ্জ',
+    'উরুগুয়ে',
+    'উজ্বেকিস্থান',
+    'ভানুয়াতু',
+    'ভেনেজুয়েলা',
+    'ভিয়েতনাম',
+    'ইমেন',
+    'জাম্বিয়া',
+    'জিম্বাবুয়ে',
+  ];
+
+  Widget age(bool language) {
     List<String> ages = [];
     for (int i = 0; i < 150; i++) {
       ages.add(i.toString());
     }
-    return Column(children: <Widget>[
-      new Text('I am'),
-      new DropdownButton<String>(
-        value: _selectedAge,
-        hint: Text(
-          'Select Your Age',
-          style: TextStyle(fontSize: 20),
-        ),
-        items: ages.map((String value) {
-          return new DropdownMenuItem<String>(
-            value: value,
-            child: new Text(
-              value,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 25,
-              ),
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new Text(language == false ? 'I am' : 'আমি'),
+          new DropdownButton<String>(
+            value: _selectedAge,
+            hint: Text(
+              language == false
+                  ? 'Select Your Age'
+                  : 'আপনার বয়স নির্বাচন করুন',
+              style: TextStyle(fontSize: 20),
             ),
-          );
-        }).toList(),
-        onChanged: (newValue) {
-          setState(() {
-            _selectedAge = newValue;
-            widget.feedbackForm.age = _selectedAge;
-            print(widget.feedbackForm.toParams());
-          });
-        },
-      )
-    ]);
+            items: ages.map((String value) {
+              return new DropdownMenuItem<String>(
+                value: value,
+                child: new Text(
+                  value,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 25,
+                  ),
+                ),
+              );
+            }).toList(),
+            onChanged: (newValue) {
+              setState(() {
+                _selectedAge = newValue;
+                widget.feedbackForm.age = _selectedAge;
+                print(widget.feedbackForm.toParams());
+              });
+            },
+          )
+        ]);
   }
 
-  Widget sex() {
+  Widget sex(bool language) {
     List<String> gender = ['Male', 'Female', 'Other'];
-
-    return Column(children: <Widget>[
-      new Text('I am'),
-      new DropdownButton<String>(
-        value: _selectedGender,
-        hint: Text(
-          'Select Your Gender',
-          style: TextStyle(fontSize: 20),
-        ),
-        items: gender.map((String value) {
-          return new DropdownMenuItem<String>(
-            value: value,
-            child: new Text(
-              value,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 25,
-              ),
+    List<String> bnGender = ['পুরুষ', 'মহিলা', 'অন্যান্য'];
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          new Text(language == false ? 'I am' : 'আমি'),
+          new DropdownButton<String>(
+            value: _selectedGender,
+            hint: Text(
+              language == false ? 'Select Your Gender' : 'আপনার লিঙ্গ নির্বাচন',
+              style: TextStyle(fontSize: 20),
             ),
-          );
-        }).toList(),
-        onChanged: (newValue) {
-          setState(() {
-            _selectedGender = newValue;
-            widget.feedbackForm.sex = _selectedGender;
-            print(widget.feedbackForm.toParams());
-          });
-        },
-      )
-    ]);
+            items: (language == false ? gender : bnGender).map((String value) {
+              return new DropdownMenuItem<String>(
+                value: value,
+                child: new Text(
+                  value,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 25,
+                  ),
+                ),
+              );
+            }).toList(),
+            onChanged: (newValue) {
+              setState(() {
+                _selectedGender = newValue;
+                widget.feedbackForm.sex = language == false
+                    ? _selectedGender
+                    : gender[bnGender.indexOf(_selectedGender)];
+                print(widget.feedbackForm.toParams());
+              });
+            },
+          )
+        ]);
   }
 
-  Widget heartDisease() {
+  Widget heartDisease(bool language) {
     List<String> submit = ['Yes', 'No'];
+    List<String> bnSubmit = ['হ্যাঁ', 'না'];
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        Text('Do you have heart disease?'),
+        Text(language == false
+            ? 'Do you have heart disease?'
+            : 'আপনার কি হৃদরোগ আছে?'),
         new DropdownButton<String>(
           value: _heart,
           hint: Text(
-            'Select yes/no',
+            language == false ? 'Select yes/no' : 'হ্যাঁ / না নির্বাচন করুন',
             style: TextStyle(fontSize: 20),
           ),
-          items: submit.map((String value) {
+          items: (language == false ? submit : bnSubmit).map((String value) {
             return new DropdownMenuItem<String>(
               value: value,
               child: new Text(
@@ -431,7 +692,8 @@ class QuestionCardState extends State<QuestionCard> {
           onChanged: (newValue) {
             setState(() {
               _heart = newValue;
-              widget.feedbackForm.heartdisease = _heart;
+              widget.feedbackForm.heartdisease =
+                  language == false ? _heart : submit[bnSubmit.indexOf(_heart)];
               print(widget.feedbackForm.toParams());
             });
           },
@@ -440,20 +702,24 @@ class QuestionCardState extends State<QuestionCard> {
     );
   }
 
-  Widget lungDisease() {
+  Widget lungDisease(bool language) {
     List<String> submit = ['Yes', 'No'];
+
+    List<String> bnSubmit = ['হ্যাঁ', 'না'];
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        Text('Do you have lung disease?'),
+        Text(language == false
+            ? 'Do you have lung disease?'
+            : 'আপনার কি ফুসফুসের রোগ আছে?'),
         new DropdownButton<String>(
           value: _lung,
           hint: Text(
-            'Select yes/no',
+            language == false ? 'Select yes/no' : 'হ্যাঁ / না নির্বাচন করুন',
             style: TextStyle(fontSize: 20),
           ),
-          items: submit.map((String value) {
+          items: (language == false ? submit : bnSubmit).map((String value) {
             return new DropdownMenuItem<String>(
               value: value,
               child: new Text(
@@ -468,8 +734,8 @@ class QuestionCardState extends State<QuestionCard> {
           onChanged: (newValue) {
             setState(() {
               _lung = newValue;
-              widget.feedbackForm.lungdisease = _lung;
-              print(widget.feedbackForm.toParams());
+              widget.feedbackForm.lungdisease =
+                  language == false ? _lung : submit[bnSubmit.indexOf(_lung)];
             });
           },
         )
@@ -477,20 +743,23 @@ class QuestionCardState extends State<QuestionCard> {
     );
   }
 
-  Widget diabetes() {
+  Widget diabetes(bool language) {
     List<String> submit = ['Yes', 'No'];
+    List<String> bnSubmit = ['হ্যাঁ', 'না'];
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        Text('Do you have diabetes?'),
+        Text(language == false
+            ? 'Do you have diabetes?'
+            : 'আপনার কি ডায়াবেটিস আছে?'),
         new DropdownButton<String>(
           value: _diabetes,
           hint: Text(
-            'Select yes/no',
+            language == false ? 'Select yes/no' : 'হ্যাঁ / না নির্বাচন করুন',
             style: TextStyle(fontSize: 20),
           ),
-          items: submit.map((String value) {
+          items: (language == false ? submit : bnSubmit).map((String value) {
             return new DropdownMenuItem<String>(
               value: value,
               child: new Text(
@@ -505,7 +774,9 @@ class QuestionCardState extends State<QuestionCard> {
           onChanged: (newValue) {
             setState(() {
               _diabetes = newValue;
-              widget.feedbackForm.diabetes = _diabetes;
+              widget.feedbackForm.diabetes = language == false
+                  ? _diabetes
+                  : submit[bnSubmit.indexOf(_diabetes)];
             });
           },
         )
@@ -513,20 +784,23 @@ class QuestionCardState extends State<QuestionCard> {
     );
   }
 
-  Widget fever() {
+//done till here
+
+  Widget fever(bool language) {
     List<String> submit = ['Yes', 'No'];
+    List<String> bnSubmit = ['হ্যাঁ', 'না'];
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        Text('Do you have fever?'),
+        Text(language == false ? 'Do you have fever?' : 'আপনার জ্বর আছে'),
         new DropdownButton<String>(
           value: _fever,
           hint: Text(
-            'Select yes/no',
+            language == false ? 'Select yes/no' : 'হ্যাঁ / না নির্বাচন করুন',
             style: TextStyle(fontSize: 20),
           ),
-          items: submit.map((String value) {
+          items: (language == false ? submit : bnSubmit).map((String value) {
             return new DropdownMenuItem<String>(
               value: value,
               child: new Text(
@@ -541,7 +815,8 @@ class QuestionCardState extends State<QuestionCard> {
           onChanged: (newValue) {
             setState(() {
               _fever = newValue;
-              widget.feedbackForm.fever = _fever;
+              widget.feedbackForm.fever =
+                  language == false ? _fever : submit[bnSubmit.indexOf(_fever)];
             });
           },
         )
@@ -549,20 +824,21 @@ class QuestionCardState extends State<QuestionCard> {
     );
   }
 
-  Widget cough() {
+  Widget cough(bool language) {
     List<String> submit = ['Yes', 'No'];
+    List<String> bnSubmit = ['হ্যাঁ', 'না'];
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        Text('Do you have cough?'),
+        Text(language == false ? 'Do you have cough?' : 'আপনার কাশি আছে?'),
         new DropdownButton<String>(
           value: _cough,
           hint: Text(
-            'Select yes/no',
+            language == false ? 'Select yes/no' : 'হ্যাঁ / না নির্বাচন করুন',
             style: TextStyle(fontSize: 20),
           ),
-          items: submit.map((String value) {
+          items: (language == false ? submit : bnSubmit).map((String value) {
             return new DropdownMenuItem<String>(
               value: value,
               child: new Text(
@@ -577,7 +853,8 @@ class QuestionCardState extends State<QuestionCard> {
           onChanged: (newValue) {
             setState(() {
               _cough = newValue;
-              widget.feedbackForm.cough = _cough;
+              widget.feedbackForm.cough =
+                  language == false ? _cough : submit[bnSubmit.indexOf(_cough)];
             });
           },
         )
@@ -585,20 +862,24 @@ class QuestionCardState extends State<QuestionCard> {
     );
   }
 
-  Widget sob() {
+  Widget sob(bool language) {
     List<String> submit = ['Yes', 'No'];
+
+    List<String> bnSubmit = ['হ্যাঁ', 'না'];
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        Text('Do you have shortness of breath?'),
+        Text(language == false
+            ? 'Do you have shortness of breath?'
+            : 'আপনার কি শ্বাসকষ্ট আছে?'),
         new DropdownButton<String>(
           value: _sob,
           hint: Text(
-            'Select yes/no',
+            language == false ? 'Select yes/no' : 'হ্যাঁ / না নির্বাচন করুন',
             style: TextStyle(fontSize: 20),
           ),
-          items: submit.map((String value) {
+          items: (language == false ? submit : bnSubmit).map((String value) {
             return new DropdownMenuItem<String>(
               value: value,
               child: new Text(
@@ -613,7 +894,8 @@ class QuestionCardState extends State<QuestionCard> {
           onChanged: (newValue) {
             setState(() {
               _sob = newValue;
-              widget.feedbackForm.shortnessofbreathe = _sob;
+              widget.feedbackForm.shortnessofbreathe =
+                  language == false ? _sob : submit[bnSubmit.indexOf(_sob)];
             });
           },
         )
@@ -621,20 +903,24 @@ class QuestionCardState extends State<QuestionCard> {
     );
   }
 
-  Widget pic() {
+  Widget pic(bool language) {
     List<String> submit = ['Yes', 'No'];
+
+    List<String> bnSubmit = ['হ্যাঁ', 'না'];
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        Text('Do you have pressure in chest?'),
+        Text(language == false
+            ? 'Do you have pressure in chest?'
+            : 'তোমার বুকে চাপ আছে?'),
         new DropdownButton<String>(
           value: _pic,
           hint: Text(
-            'Select yes/no',
+            language == false ? 'Select yes/no' : 'হ্যাঁ / না নির্বাচন করুন',
             style: TextStyle(fontSize: 20),
           ),
-          items: submit.map((String value) {
+          items: (language == false ? submit : bnSubmit).map((String value) {
             return new DropdownMenuItem<String>(
               value: value,
               child: new Text(
@@ -649,7 +935,8 @@ class QuestionCardState extends State<QuestionCard> {
           onChanged: (newValue) {
             setState(() {
               _pic = newValue;
-              widget.feedbackForm.pressureinthechest = _pic;
+              widget.feedbackForm.pressureinthechest =
+                  language == false ? _pic : submit[bnSubmit.indexOf(_pic)];
             });
           },
         )
@@ -657,23 +944,27 @@ class QuestionCardState extends State<QuestionCard> {
     );
   }
 
-  Widget cc() {
+  Widget cc(bool language) {
     List<String> submit = ['Yes', 'No'];
+
+    List<String> bnSubmit = ['হ্যাঁ', 'না'];
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Text(
-          'Did you have close contact\n with corona patient?',
+          language == false
+              ? 'Did you have close contact\n with corona patient?'
+              : 'আপনার কি করোনার রোগীর সাথে\n ঘনিষ্ঠ যোগাযোগ ছিল?',
           textAlign: TextAlign.center,
         ),
         new DropdownButton<String>(
           value: _cc,
           hint: Text(
-            'Select yes/no',
+            language == false ? 'Select yes/no' : 'হ্যাঁ / না নির্বাচন করুন',
             style: TextStyle(fontSize: 20),
           ),
-          items: submit.map((String value) {
+          items: (language == false ? submit : bnSubmit).map((String value) {
             return new DropdownMenuItem<String>(
               value: value,
               child: new Text(
@@ -688,7 +979,8 @@ class QuestionCardState extends State<QuestionCard> {
           onChanged: (newValue) {
             setState(() {
               _cc = newValue;
-              widget.feedbackForm.closecontactwithcoronapatient = _cc;
+              widget.feedbackForm.closecontactwithcoronapatient =
+                  language == false ? _cc : submit[bnSubmit.indexOf(_cc)];
             });
           },
         )
@@ -696,21 +988,24 @@ class QuestionCardState extends State<QuestionCard> {
     );
   }
 
-  Widget tc() {
+  Widget tc(bool language) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Text(
-          'Have you been outside\n of the country?',
+          language == false
+              ? 'Have you been outside\n of the country?'
+              : 'আপনি কি দেশের বাইরে ছিলেন?',
           textAlign: TextAlign.center,
         ),
         new DropdownButton<String>(
           value: _tc,
           hint: Text(
-            'Select country',
+            language == false ? 'Select country' : 'দেশ নির্বাচন করুন',
             style: TextStyle(fontSize: 15),
           ),
-          items: countries.map((String value) {
+          items: (language == false ? countries : bangla_countries)
+              .map((String value) {
             return new DropdownMenuItem<String>(
               value: value,
               child: new Text(
@@ -725,8 +1020,10 @@ class QuestionCardState extends State<QuestionCard> {
           onChanged: (newValue) {
             setState(() {
               _tc = newValue;
-              widget.feedbackForm.traveledcountry = _tc;
-              print(widget.feedbackForm.heartdisease);
+              widget.feedbackForm.traveledcountry = language == false
+                  ? _tc
+                  : countries[bangla_countries.indexOf(_tc)];
+              print(widget.feedbackForm.toParams());
             });
           },
         )
@@ -749,14 +1046,6 @@ class QuestionCardState extends State<QuestionCard> {
     int _coughState = cough == "Yes" ? 1 : 0;
     int _lungState = lung == "Yes" ? 1 : 0;
     int _sexState = sex == "Male" ? 1 : 0;
-
-    print(_breatheState);
-    print(_feverState);
-    print(_chestState);
-    print(_contactState);
-    print(_coughState);
-    print(_sexState);
-    print(_lungState);
 
     var countryMap = {
       'china': 2,
@@ -807,9 +1096,8 @@ class QuestionCardState extends State<QuestionCard> {
       'portugal': 1,
       'sindh': 2,
       'taftan': 2,
-      'saudia srabia':2,
-      'dubai':2,
-
+      'saudia srabia': 2,
+      'dubai': 2,
     };
     if (countryMap.containsKey(tc.toLowerCase())) {
       travelState = countryMap[tc.toLowerCase()];
@@ -818,35 +1106,33 @@ class QuestionCardState extends State<QuestionCard> {
     }
 
     print(travelState);
-    int score=travelState;
-    if(_breatheState==1){
-      score+=1;
+    int score = travelState;
+    if (_breatheState == 1) {
+      score += 1;
     }
-    if(_feverState==1){
-      score+=1;
+    if (_feverState == 1) {
+      score += 1;
     }
-    if(_coughState==1){
-      score+=1;
+    if (_coughState == 1) {
+      score += 1;
     }
-    if(_contactState==1){
-      score+=3;
+    if (_contactState == 1) {
+      score += 3;
     }
-    if(_lungState==1){
-      score+=1;
+    if (_lungState == 1) {
+      score += 1;
     }
-    if(_chestState==1){
-      score+=1;
+    if (_chestState == 1) {
+      score += 1;
     }
-    if(score<=3){
+    if (score <= 3) {
       return -1;
-    }
-    else if(score>=3 && score<=4){
+    } else if (score >= 3 && score <= 4) {
       return 0;
-    }
-    else if(score>=5 && score<=6){
+    } else if (score >= 5 && score <= 6) {
       return 2;
-    }
-    else return 1;
+    } else
+      return 1;
 
 /*
     if (1 - _breatheState <= 0.5) {
@@ -938,12 +1224,7 @@ class QuestionCardState extends State<QuestionCard> {
 
   int decision = 0;
 
-  Future navigateToPrdictPage(context) async {
-    Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => PredictionPage(decision)));
-  }
-
-  Widget submit() {
+  Widget submit(bool language) {
     _getCurrentLocation();
 
     return Container(
@@ -954,7 +1235,10 @@ class QuestionCardState extends State<QuestionCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text('Submit Your Response \n and please wait for result',
+                    Text(
+                        language == false
+                            ? 'Submit Your Response \n and please wait for result'
+                            : 'আপনার প্রতিক্রিয়া জমা দিন\nএবং দয়া করে ফলাফলের জন্য অপেক্ষা করুন',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.black,
@@ -987,8 +1271,10 @@ class QuestionCardState extends State<QuestionCard> {
                           print("Response: $response");
                           if (response == FormController.STATUS_SUCCESS) {
                             // Feedback is saved succesfully in Google Sheets.
-                            //_showSnackbar("Feedback Submitted");
-                            navigateToPrdictPage(context);
+                            setState(() {
+                              flag = 1;
+                            });
+                            _showSnackbar("Feedback Submitted");
                           } else {
                             // Error Occurred while saving data in Google Sheets.
                             _showSnackbar(
@@ -999,6 +1285,8 @@ class QuestionCardState extends State<QuestionCard> {
 
                         // Submit 'feedbackForm' and save it in Google Sheets.
                         formController.submitForm(widget.feedbackForm);
+                        Navigator.pushReplacementNamed(context, '/predict',
+                            arguments: [decision, language]);
                       },
                       child: Container(
                           height: 50,
@@ -1007,7 +1295,7 @@ class QuestionCardState extends State<QuestionCard> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              Text('Submit',
+                              Text(language == false ? 'Submit' : 'জমা দিন',
                                   style: TextStyle(
                                     color: Colors.blueAccent,
                                     fontSize: 17,
@@ -1031,76 +1319,54 @@ class QuestionCardState extends State<QuestionCard> {
     );
   }
 
-  Widget getWidgetByCatagory() {
+  Widget getWidgetByCatagory(bool language) {
     switch (widget.type) {
       case "age":
-        return Positioned(
-          child: age(),
-          top: MediaQuery.of(context).size.height * .3,
-          left: MediaQuery.of(context).size.width * .2,
+        return Container(
+          child: age(language),
         );
       case "sex":
-        return Positioned(
-          child: sex(),
-          top: MediaQuery.of(context).size.height * .3,
-          left: MediaQuery.of(context).size.width * .15,
+        return Container(
+          child: sex(language),
         );
       case "hd":
-        return Positioned(
-          child: heartDisease(),
-          top: MediaQuery.of(context).size.height * .3,
-          left: MediaQuery.of(context).size.width * .175,
+        return Container(
+          child: heartDisease(language),
         );
       case "ld":
-        return Positioned(
-          child: lungDisease(),
-          top: MediaQuery.of(context).size.height * .3,
-          left: MediaQuery.of(context).size.width * .175,
+        return Container(
+          child: lungDisease(language),
         );
       case "db":
-        return Positioned(
-          child: diabetes(),
-          top: MediaQuery.of(context).size.height * .3,
-          left: MediaQuery.of(context).size.width * .2,
+        return Container(
+          child: diabetes(language),
         );
       case "fever":
-        return Positioned(
-          child: fever(),
-          top: MediaQuery.of(context).size.height * .3,
-          left: MediaQuery.of(context).size.width * .2,
+        return Container(
+          child: fever(language),
         );
       case "cough":
-        return Positioned(
-          child: cough(),
-          top: MediaQuery.of(context).size.height * .3,
-          left: MediaQuery.of(context).size.width * .2,
+        return Container(
+          child: cough(language),
         );
       case "sob":
-        return Positioned(
-          child: sob(),
-          top: MediaQuery.of(context).size.height * .3,
-          left: MediaQuery.of(context).size.width * .15,
+        return Container(
+          child: sob(language),
         );
       case "pic":
-        return Positioned(
-          child: pic(),
-          top: MediaQuery.of(context).size.height * .3,
-          left: MediaQuery.of(context).size.width * .15,
+        return Container(
+          child: pic(language),
         );
       case "cc":
-        return Positioned(
-          child: cc(),
-          top: MediaQuery.of(context).size.height * .3,
-          left: MediaQuery.of(context).size.width * .18,
+        return Container(
+          child: cc(language),
         );
       case "tc":
-        return Positioned(
-          child: tc(),
-          top: MediaQuery.of(context).size.height * .3,
-          left: MediaQuery.of(context).size.width * .1,
+        return Container(
+          child: tc(language),
         );
       case "submit":
-        return submit();
+        return submit(language);
     }
 
     return Container();
@@ -1117,18 +1383,17 @@ class QuestionCardState extends State<QuestionCard> {
                   ),
                 ),
               )
-            : Stack(
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  getWidgetByCatagory(),
-                  Positioned(
-                      bottom: MediaQuery.of(context).size.height * .07,
-                      left: 0,
-                      right: 0,
+                  getWidgetByCatagory(widget.language),
+                  Align(
+                      alignment: Alignment.bottomCenter,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          
                           RaisedButton(
                             elevation: 0,
                             shape: RoundedRectangleBorder(
@@ -1143,9 +1408,7 @@ class QuestionCardState extends State<QuestionCard> {
                                       duration: widget._kDuration,
                                       curve: widget._kCurve);
                                 }
-                              }
-
-                              else if (widget.type == 'sex') {
+                              } else if (widget.type == 'sex') {
                                 if (widget.feedbackForm.sex == "Unspecified") {
                                   _showSnackbar('Please Select Gender');
                                 } else {
@@ -1153,90 +1416,82 @@ class QuestionCardState extends State<QuestionCard> {
                                       duration: widget._kDuration,
                                       curve: widget._kCurve);
                                 }
-                              }
-
-                              else if (widget.type == 'hd') {
-                                if (widget.feedbackForm.heartdisease == "Unspecified") {
+                              } else if (widget.type == 'hd') {
+                                if (widget.feedbackForm.heartdisease ==
+                                    "Unspecified") {
                                   _showSnackbar('Please Select An Option');
                                 } else {
                                   widget.controller.nextPage(
                                       duration: widget._kDuration,
                                       curve: widget._kCurve);
                                 }
-                              }
-
-                              else if (widget.type == 'ld') {
-                                if (widget.feedbackForm.lungdisease == "Unspecified") {
+                              } else if (widget.type == 'ld') {
+                                if (widget.feedbackForm.lungdisease ==
+                                    "Unspecified") {
                                   _showSnackbar('Please Select An Option');
                                 } else {
                                   widget.controller.nextPage(
                                       duration: widget._kDuration,
                                       curve: widget._kCurve);
                                 }
-                              }
-
-                              else if (widget.type == 'db') {
-                                if (widget.feedbackForm.diabetes == "Unspecified") {
+                              } else if (widget.type == 'db') {
+                                if (widget.feedbackForm.diabetes ==
+                                    "Unspecified") {
                                   _showSnackbar('Please Select An Option');
                                 } else {
                                   widget.controller.nextPage(
                                       duration: widget._kDuration,
                                       curve: widget._kCurve);
                                 }
-                              }
-
-                              else if (widget.type == 'fever') {
-                                if (widget.feedbackForm.fever == "Unspecified") {
+                              } else if (widget.type == 'fever') {
+                                if (widget.feedbackForm.fever ==
+                                    "Unspecified") {
                                   _showSnackbar('Please Select An Option');
                                 } else {
                                   widget.controller.nextPage(
                                       duration: widget._kDuration,
                                       curve: widget._kCurve);
                                 }
-                              }
-
-                              else if (widget.type == 'cough') {
-                                if (widget.feedbackForm.cough == "Unspecified") {
+                              } else if (widget.type == 'cough') {
+                                if (widget.feedbackForm.cough ==
+                                    "Unspecified") {
                                   _showSnackbar('Please Select An Option');
                                 } else {
                                   widget.controller.nextPage(
                                       duration: widget._kDuration,
                                       curve: widget._kCurve);
                                 }
-                              }
-
-                              else if (widget.type == 'sob') {
-                                if (widget.feedbackForm.shortnessofbreathe == "Unspecified") {
+                              } else if (widget.type == 'sob') {
+                                if (widget.feedbackForm.shortnessofbreathe ==
+                                    "Unspecified") {
                                   _showSnackbar('Please Select An Option');
                                 } else {
                                   widget.controller.nextPage(
                                       duration: widget._kDuration,
                                       curve: widget._kCurve);
                                 }
-                              }
-
-                              else if (widget.type == 'pic') {
-                                if (widget.feedbackForm.pressureinthechest == "Unspecified") {
+                              } else if (widget.type == 'pic') {
+                                if (widget.feedbackForm.pressureinthechest ==
+                                    "Unspecified") {
                                   _showSnackbar('Please Select An Option');
                                 } else {
                                   widget.controller.nextPage(
                                       duration: widget._kDuration,
                                       curve: widget._kCurve);
                                 }
-                              }
-
-                              else if (widget.type == 'cc') {
-                                if (widget.feedbackForm.closecontactwithcoronapatient == "Unspecified") {
+                              } else if (widget.type == 'cc') {
+                                if (widget.feedbackForm
+                                        .closecontactwithcoronapatient ==
+                                    "Unspecified") {
                                   _showSnackbar('Please Select An Option');
                                 } else {
                                   widget.controller.nextPage(
                                       duration: widget._kDuration,
                                       curve: widget._kCurve);
                                 }
-                              }
-
-                              else {
-                                if (widget.feedbackForm.traveledcountry == "Unspecified") {
+                              } else {
+                                if (widget.feedbackForm.traveledcountry ==
+                                    "Unspecified") {
                                   _showSnackbar('Please Select An Option');
                                 } else {
                                   widget.controller.nextPage(
@@ -1245,7 +1500,8 @@ class QuestionCardState extends State<QuestionCard> {
                                 }
                               }
                             },
-                            child: Text('Next'),
+                            child: Text(
+                                widget.language == false ? 'Next' : 'পরবর্তী'),
                           ),
                         ],
                       ))
@@ -1254,7 +1510,7 @@ class QuestionCardState extends State<QuestionCard> {
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: new BorderRadius.all(const Radius.circular(35.0))),
-        height: MediaQuery.of(context).size.height * .75,
+        height: MediaQuery.of(context).size.height * .6,
         width: MediaQuery.of(context).size.width * .8);
   }
 }

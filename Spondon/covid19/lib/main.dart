@@ -1,5 +1,6 @@
 import 'package:covid19/view/home.dart';
 import 'package:covid19/view/map.dart';
+import 'package:covid19/view/predict.dart';
 import 'package:covid19/view/quarantine.dart';
 import 'package:covid19/view/question.dart';
 import 'package:covid19/view/symtoms.dart';
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
         '/symptoms': (context) => Symptoms(),
         '/map': (context) => MapPage(),
         '/statistics' : (context) => Statistics(),
-        '/quarantine': (context) => Quarantine()
+        '/quarantine': (context) => Quarantine(),
+        '/predict':(context) => PredictionPage()
       },
     );
   }
