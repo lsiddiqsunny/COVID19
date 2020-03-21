@@ -38,7 +38,7 @@ class HomeScreenState extends State<HomeScreen> {
               ),
               elevation: 0,
               onPressed: () {
-                Navigator.pushNamed(context, '/questions',arguments: language);
+                Navigator.pushNamed(context, '/questions', arguments: language);
               },
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.07,
@@ -90,7 +90,7 @@ class HomeScreenState extends State<HomeScreen> {
               ),
               elevation: 0,
               onPressed: () {
-                Navigator.pushNamed(context, '/symptoms');
+                Navigator.pushNamed(context, '/symptoms', arguments: language);
               },
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.30,
