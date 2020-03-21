@@ -1125,7 +1125,7 @@ class QuestionCardState extends State<QuestionCard> {
     if (_chestState == 1) {
       score += 1;
     }
-    if (score <= 3) {
+    if (score < 3) {
       return -1;
     } else if (score >= 3 && score <= 4) {
       return 0;
