@@ -1271,7 +1271,7 @@ class QuestionCardState extends State<QuestionCard> {
                           disease="Ok";
                         }
                         else if(disease==0){
-                          disease="flu;"
+                          disease="flu";
                         }
                         else if(disease==1){
                           disease="corona";
