@@ -74,7 +74,8 @@ class PredictionPage extends StatelessWidget {
                                 BorderSide(color: Colors.blueAccent, width: 2)),
                         onPressed: () {
                           final RenderBox box = context.findRenderObject();
-                          Share.share("text",
+                          Share.share(
+                              "The best way to prevent corona is awareness. If you have the potential symptoms of corona, go for a checkup. For any kind of queries follow the link\nhttp://www.amazon.com/gp/mas/dl/android?s=Obogoto",
                               subject: "subject",
                               sharePositionOrigin:
                                   box.localToGlobal(Offset.zero) & box.size);
