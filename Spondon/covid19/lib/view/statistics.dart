@@ -53,7 +53,7 @@ Map<String, double> dataMapAll = new Map();
     return Scaffold(
       backgroundColor: primaryColor,
       appBar: AppBar(
-        title: Text("Covid19 Statistics"),
+        title: Text("CoVID19 Statistics"),
       ),
       body:  BlocProvider<CovidBloc>(
         create: (BuildContext context) =>  CovidBloc(repository: Repository())..add(CovidBdDataEvent(param:"countries/bangladesh",paramAll: "all")),
@@ -94,7 +94,7 @@ Map<String, double> dataMapAll = new Map();
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
-                                      Text("Bangladesh Covid 19",style: TextStyle(fontSize: 18),),
+                                      Text("Bangladesh CoVID19",style: TextStyle(fontSize: 18),),
                                     ],
                                   ),
                                   SizedBox(height: 20,),
@@ -161,7 +161,7 @@ Map<String, double> dataMapAll = new Map();
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
-                                      Text("World Covid 19 ",style: TextStyle(fontSize: 18),),
+                                      Text("World CoVID19 ",style: TextStyle(fontSize: 18),),
                                       Column(
                                         children: <Widget>[
                                           Text("Updated on",style: TextStyle(fontSize: 12,color:Colors.blueGrey ),),
