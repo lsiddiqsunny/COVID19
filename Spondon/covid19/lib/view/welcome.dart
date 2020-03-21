@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -8,6 +9,18 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class WelcomeScreenState extends State<WelcomeScreen> {
+  final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+
+  void _getCurrentLocation() {
+    geolocator
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      print(position);
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,22 +34,11 @@ class WelcomeScreenState extends State<WelcomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'অবগত',
+                        'CoVID 19',
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 30,
                             fontWeight: FontWeight.bold),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Text(
-                          ' This app is made for the general awareness of people about covid 19 and its current situation in Bangladesh. \nSo we will encourage not to input any wrong information \nso that everyone can be aware of the actual situation and ensure their safety',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500),
-                        ),
                       ),
                       RaisedButton(
                         color: Colors.white,
@@ -46,6 +48,7 @@ class WelcomeScreenState extends State<WelcomeScreen> {
                             side:
                                 BorderSide(color: Colors.blueAccent, width: 2)),
                         onPressed: () {
+                          _getCurrentLocation();
                           Navigator.pushReplacementNamed(context, '/home');
                         },
                         child: Container(
