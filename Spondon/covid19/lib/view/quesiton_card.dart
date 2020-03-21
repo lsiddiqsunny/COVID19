@@ -988,7 +988,7 @@ class QuestionCardState extends State<QuestionCard> {
                           if (response == FormController.STATUS_SUCCESS) {
                             // Feedback is saved succesfully in Google Sheets.
                             //_showSnackbar("Feedback Submitted");
-                            navigateToPrdictPage(context);
+                            navigateToPrdictPage(context);                           
                           } else {
                             // Error Occurred while saving data in Google Sheets.
                             _showSnackbar(
@@ -998,7 +998,9 @@ class QuestionCardState extends State<QuestionCard> {
                         });
 
                         // Submit 'feedbackForm' and save it in Google Sheets.
+                        widget.feedbackForm.currentaddress=_currentPosition.toString();
                         formController.submitForm(widget.feedbackForm);
+
                       },
                       child: Container(
                           height: 50,
