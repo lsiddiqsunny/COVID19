@@ -1251,6 +1251,7 @@ class QuestionCardState extends State<QuestionCard> {
                           borderRadius: new BorderRadius.circular(25.0),
                           side: BorderSide(color: Colors.blueAccent, width: 2)),
                       onPressed: () {
+                         _getCurrentLocation();
                         setState(() {
                           flag = 0;
                         });
@@ -1265,7 +1266,21 @@ class QuestionCardState extends State<QuestionCard> {
                             widget.feedbackForm.pressureinthechest,
                             widget.feedbackForm.closecontactwithcoronapatient,
                             widget.feedbackForm.traveledcountry);
-
+                        String disease="";
+                        if(decision==--1){
+                          disease="Ok";
+                        }
+                        else if(disease==0){
+                          disease="flu;"
+                        }
+                        else if(disease==1){
+                          disease="corona";
+                        }
+                        else{
+                          disease="cold";
+                        }
+                        widget.feedbackForm.coronapatient=disease;
+                        widget.feedbackForm.currentaddress=_currentPosition.toString();
                         FormController formController =
                             FormController((String response) {
                           print("Response: $response");
@@ -1286,7 +1301,7 @@ class QuestionCardState extends State<QuestionCard> {
                         });
 
                         // Submit 'feedbackForm' and save it in Google Sheets.
-                        widget.feedbackForm.currentaddress=_currentPosition.toString();
+                        
                         formController.submitForm(widget.feedbackForm);
                         Navigator.pushReplacementNamed(context, '/predict',
                             arguments: [decision, language]);
