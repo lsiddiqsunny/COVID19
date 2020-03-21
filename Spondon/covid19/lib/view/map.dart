@@ -188,8 +188,100 @@ Marker gopalganj = Marker(
   _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("11 people is in home qurantine."),));
 },
 );
+
+Marker ijetma= Marker(
+  markerId: MarkerId('Bishwa Ijtema Field'),
+  position: LatLng(23.8914722, 90.3968637),
+  infoWindow: InfoWindow(title: 'Bishwa Ijtema Field'),
+  icon: BitmapDescriptor.defaultMarkerWithHue(
+    BitmapDescriptor.hueGreen,
+  ),
+  onTap:  (){
+  _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Quarantine Zone at Tongi,Gazipur."),));
+},
+);
+Marker hajjcamp= Marker(
+  markerId: MarkerId('Ashkona Hajj Camp'),
+  position: LatLng(23.8504, 90.4120),
+  infoWindow: InfoWindow(title: 'Ashkona Hajj Camp'),
+  icon: BitmapDescriptor.defaultMarkerWithHue(
+    BitmapDescriptor.hueGreen,
+  ),
+  onTap:  (){
+  _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Quarantine Zone at Ashkona Hajj Camp."),));
+},
+);
+
+Marker rajuk= Marker(
+  markerId: MarkerId('RAJUK Uttara Apartment Project'),
+  position: LatLng(23.8581, 90.3539),
+  infoWindow: InfoWindow(title: 'RAJUK Uttara Apartment Project'),
+  icon: BitmapDescriptor.defaultMarkerWithHue(
+    BitmapDescriptor.hueGreen,
+  ),
+  onTap:  (){
+  _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Quarantine Zone at Uttara Apartment Project."),));
+},
+);
+
+Marker mugda= Marker(
+  markerId: MarkerId('Mugda General Hospital'),
+  position: LatLng(23.7320, 90.4300),
+  infoWindow: InfoWindow(title: 'Mugda General Hospital'),
+  icon: BitmapDescriptor.defaultMarkerWithHue(
+    BitmapDescriptor.hueViolet,
+  ),
+  onTap:  (){
+  _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Corona treatment at Mugda General Hospital."),));
+},
+);
+Marker kuwait= Marker(
+  markerId: MarkerId('Kuwait Moitree Hospital'),
+  position: LatLng(23.871417, 90.403583),
+  infoWindow: InfoWindow(title: 'Kuwait Moitree Hospital'),
+  icon: BitmapDescriptor.defaultMarkerWithHue(
+    BitmapDescriptor.hueViolet,
+  ),
+  onTap:  (){
+  _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Corona treatment at Kuwait Moitree Hospital."),));
+},
+);
+
+Marker mohanagar= Marker(
+  markerId: MarkerId('Dhaka Mohanagar General Hospital'),
+  position: LatLng(23.7140, 90.4051),
+  infoWindow: InfoWindow(title: 'Dhaka Mohanagar General Hospital'),
+  icon: BitmapDescriptor.defaultMarkerWithHue(
+    BitmapDescriptor.hueViolet,
+  ),
+  onTap:  (){
+  _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Corona treatment at Dhaka Mohanagar General Hospital."),));
+},
+);
+Marker kurmitola= Marker(
+  markerId: MarkerId('Kurmitola General Hospital'),
+  position: LatLng(23.8191, 90.4094),
+  infoWindow: InfoWindow(title: 'Kurmitola General Hospital'),
+  icon: BitmapDescriptor.defaultMarkerWithHue(
+    BitmapDescriptor.hueViolet,
+  ),
+  onTap:  (){
+  _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Corona treatment at Kurmitola General Hospital."),));
+},
+);
+Marker iedcr= Marker(
+  markerId: MarkerId('IEDCR'),
+  position: LatLng(23.7797, 90.4002),
+  infoWindow: InfoWindow(title: 'IEDCR'),
+  icon: BitmapDescriptor.defaultMarkerWithHue(
+    BitmapDescriptor.hueViolet,
+  ),
+  onTap:  (){
+  _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Corona treatment at IEDCR."),));
+},
+);
 Set<Marker> getMakrker(){
-  Set<Marker> marker = {chandpur,manikganj,shariatpur,kishoreganj,narayanganj,madaripur,jhenaidah,chittagong,narsingdi,gopalganj};
+  Set<Marker> marker = {iedcr,kurmitola,mohanagar,kuwait,mugda,chandpur,manikganj,shariatpur,kishoreganj,narayanganj,madaripur,jhenaidah,chittagong,narsingdi,gopalganj,ijetma,hajjcamp,rajuk};
 
 
   return marker;
