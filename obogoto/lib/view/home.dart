@@ -18,150 +18,283 @@ class HomeScreenState extends State<HomeScreen> {
     print(language);
 
     return Scaffold(
-      key: scaffoldKey,
       backgroundColor: Colors.white,
-      body: Stack(
-        children: <Widget>[
-          Positioned(
-            child: Text(
-              language == false ? 'Home' : 'প্রধান পাতা',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            ),
-            top: MediaQuery.of(context).size.height * 0.1,
-            left: MediaQuery.of(context).size.width * 0.1,
+      body: Container(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      0, MediaQuery.of(context).size.height * .1, 0, 0)),
+              RaisedButton(
+                  padding: const EdgeInsets.all(3.0),
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius:
+                          new BorderRadius.all(const Radius.circular(25.0)),
+                      side: BorderSide(color: Colors.blue, width: 5)),
+                  elevation: 0,
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/questions',arguments: language);
+                  },
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * .125,
+                    width: MediaQuery.of(context).size.width * .7,
+                    margin: const EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(3.0),
+                    child: Center(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          new Container(
+                            width: 100.0,
+                            height: 100.0,
+                            decoration: new BoxDecoration(
+                              color: Colors.blue,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Center(
+                              child: Image.asset(
+                                'images/submit.png',
+                                scale: 20,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            language == false
+                                ? 'Submit Your \nCondition'
+                                : 'পরিস্থিতি\nজমা দিন',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )),
+              Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      0, MediaQuery.of(context).size.height * .025, 0, 0)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  RaisedButton(
+                      padding: const EdgeInsets.all(3.0),
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                              new BorderRadius.all(const Radius.circular(25.0)),
+                          side: BorderSide(color: Colors.green, width: 5)),
+                      elevation: 0,
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/map');
+                      },
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * .25,
+                        width: MediaQuery.of(context).size.width * .25,
+                        margin: const EdgeInsets.all(15.0),
+                        padding: const EdgeInsets.all(3.0),
+                        child: Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              new Container(
+                                width: 100.0,
+                                height: 100.0,
+                                decoration: new BoxDecoration(
+                                  color: Colors.green,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                  child: Image.asset(
+                                    'images/map.png',
+                                    scale: 10,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                language == false
+                                    ? 'Quarantine\nZones'
+                                    : 'পৃথক\nঅঞ্চল',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )),
+                  RaisedButton(
+                      padding: const EdgeInsets.all(3.0),
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                              new BorderRadius.all(const Radius.circular(25.0)),
+                          side: BorderSide(color: Colors.orange, width: 5)),
+                      elevation: 0,
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/symptoms', arguments: language);
+                      },
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * .25,
+                        width: MediaQuery.of(context).size.width * .25,
+                        margin: const EdgeInsets.all(15.0),
+                        padding: const EdgeInsets.all(3.0),
+                        child: Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              new Container(
+                                width: 100.0,
+                                height: 100.0,
+                                decoration: new BoxDecoration(
+                                  color: Colors.orange,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                  child: Image.asset(
+                                    'images/symptoms.png',
+                                    scale: 20,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                language == false
+                                    ? 'Symptoms \nand Information'
+                                    : 'লক্ষণ এবং তথ্য',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ))
+                ],
+              ),
+              Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      0, MediaQuery.of(context).size.height * .025, 0, 0)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  RaisedButton(
+                      padding: const EdgeInsets.all(3.0),
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                              new BorderRadius.all(const Radius.circular(25.0)),
+                          side: BorderSide(color: Colors.purple, width: 5)),
+                      elevation: 0,
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/statistics');
+                      },
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * .25,
+                        width: MediaQuery.of(context).size.width * .25,
+                        margin: const EdgeInsets.all(15.0),
+                        padding: const EdgeInsets.all(3.0),
+                        child: Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              new Container(
+                                width: 100.0,
+                                height: 100.0,
+                                decoration: new BoxDecoration(
+                                  color: Colors.purple,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                  child: Image.asset(
+                                    'images/map.png',
+                                    scale: 10,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                language == false ? 'Statistics' : 'পরিসংখ্যান',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )),
+                  RaisedButton(
+                      padding: const EdgeInsets.all(3.0),
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                              new BorderRadius.all(const Radius.circular(25.0)),
+                          side: BorderSide(color: Colors.red, width: 5)),
+                      elevation: 0,
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/quarantine');
+                      },
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * .25,
+                        width: MediaQuery.of(context).size.width * .25,
+                        margin: const EdgeInsets.all(15.0),
+                        padding: const EdgeInsets.all(3.0),
+                        child: Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              new Container(
+                                width: 100.0,
+                                height: 100.0,
+                                decoration: new BoxDecoration(
+                                  color: Colors.red,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                  child: Image.asset(
+                                    'images/testtube.png',
+                                    scale: 17,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                language == false
+                                    ? 'Nearest Test Center'
+                                    : 'নিকটতম পরীক্ষা কেন্দ্র',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ))
+                ],
+              ),
+            ],
           ),
-          Positioned(
-            child: RaisedButton(
-              color: Colors.red.withOpacity(1),
-              shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(15.0),
-              ),
-              elevation: 0,
-              onPressed: () {
-                Navigator.pushNamed(context, '/questions', arguments: language);
-              },
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.07,
-                width: MediaQuery.of(context).size.width * 0.30,
-                child: Center(
-                  child: Text(
-                    language == false
-                        ? 'Submit Your Condition'
-                        : 'পরিস্থিতি জমা দিন',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-            ),
-            top: MediaQuery.of(context).size.height * 0.09,
-            right: MediaQuery.of(context).size.width * 0.1,
-          ),
-          Positioned(
-            child: RaisedButton(
-              color: Colors.purple.withOpacity(.75),
-              shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(15.0),
-              ),
-              elevation: 0,
-              onPressed: () {
-                Navigator.pushNamed(context, '/statistics');
-              },
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.30,
-                width: MediaQuery.of(context).size.width * 0.30,
-                child: Center(
-                  child: Text(
-                    language == false ? 'Statistics' : 'পরিসংখ্যান',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-            ),
-            top: MediaQuery.of(context).size.height * 0.2,
-            left: MediaQuery.of(context).size.width * 0.1,
-          ),
-          Positioned(
-            child: RaisedButton(
-              color: Colors.blue.withOpacity(.75),
-              shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(15.0),
-              ),
-              elevation: 0,
-              onPressed: () {
-                Navigator.pushNamed(context, '/symptoms', arguments: language);
-              },
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.30,
-                width: MediaQuery.of(context).size.width * 0.30,
-                child: Center(
-                  child: Text(
-                    language == false
-                        ? 'Symptoms and Information'
-                        : 'লক্ষণ এবং তথ্য',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-            ),
-            top: MediaQuery.of(context).size.height * 0.255,
-            right: MediaQuery.of(context).size.width * 0.1,
-          ),
-          Positioned(
-            child: RaisedButton(
-              color: Colors.orange.withOpacity(.75),
-              shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(15.0),
-              ),
-              elevation: 0,
-              onPressed: () {
-                Navigator.pushNamed(context, '/quarantine');
-              },
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.30,
-                width: MediaQuery.of(context).size.width * 0.30,
-                child: Center(
-                  child: Text(
-                    language == false
-                        ? 'Nearest Test Center'
-                        : 'নিকটতম পরীক্ষা কেন্দ্র',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-            ),
-            top: MediaQuery.of(context).size.height * 0.525,
-            left: MediaQuery.of(context).size.width * 0.1,
-          ),
-          Positioned(
-            child: RaisedButton(
-              color: Colors.green.withOpacity(.75),
-              shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(15.0),
-              ),
-              elevation: 0,
-              onPressed: () {
-                Navigator.pushNamed(context, '/map');
-              },
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.30,
-                width: MediaQuery.of(context).size.width * 0.30,
-                child: Center(
-                  child: Text(
-                    language == false ? 'Quarantine Zones' : 'পৃথক অঞ্চল',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-            ),
-            top: MediaQuery.of(context).size.height * (0.255 + .325),
-            right: MediaQuery.of(context).size.width * 0.1,
-          ),
-        ],
+        ),
       ),
     );
   }
