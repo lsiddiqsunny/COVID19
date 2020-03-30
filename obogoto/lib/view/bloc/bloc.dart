@@ -21,16 +21,23 @@ class CovidBloc extends Bloc<CovidEvent,CovidState>{
 
       try{
         final result1=repository.getCovidAllData(event.paramAll);
-       final result=  repository.getCovidBdData(event.param);
+        final result=  repository.getCovidBdData(event.param);
         var results = await Future.wait([result1,result]);
         print("size response :${results.length}");
         if(results[0].statusCode !=200) throw Exception();
+        
         AllData allData=allDataFromJson(results[0].body);
+        
         if(results[1].statusCode !=200) throw Exception();
+        
         CovidBdData covidBdData=covidBdDataFromJson(results[1].body);
+        print(results[0]);
+        
+        print(results[1]);
         yield CovidBdState(covidBdData:covidBdData,allData: allData);
 
       }catch(e){
+        print(e.toString());
         yield CovidErrorState(error: e.toString());
 
       }

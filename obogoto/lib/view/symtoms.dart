@@ -8,14 +8,14 @@ class Symptoms extends StatelessWidget {
     '1. Fever\n2. Cough\n3. Shortness of breath',
     '1. Sore Throat\n2. Runny Nose\n3. Cough\n4. Sneezeing\n5. Headaches\n6. Body Aches',
     '1. Fever\n2. Cough\n3. Sore Throat\n4. Runny Nose\n5. Body Aches\n6. Headaches\n7. Tiredness\n8. Vomiting and Diarrhea',
-    'Shanjinur Islam Spondon\nLatif Siddiq Sunny\nLatifur Rahman\nMarium Mostafiz Mou\nMoynul Hasan\nNafisa Sadat Prova\nRizvan Ahmed Rafsan\Ariful Haque'
+    'Shanjinur Islam Spondon\nLatif Siddiq Sunny\nLatifur Rahman\nMarium Mostafiz Mou\nMoynul Hasan\nNafisa Sadat Prova\nRizvan Ahmed Rafsan\nAriful Haque'
   ];
 
   List<String> bn_symptoms = [
     '1। জ্বর \n2। কাশি করুন \n3। নিঃশ্বাসের দুর্বলতা',
     '1। গলা ব্যথা \n2। প্রবাহিত নাক। \n3। কাশি \n4। হাঁচি\n5। মাথাব্যাথা \n6। শরীর ব্যথা',
     '1। জ্বর \n2। কাশি করুন \n3। গলা ব্যথা \n4। প্রবাহিত নাক। \n5। শারীরিক ব্যথা \n6। মাথাব্যাথা \n7। ক্লান্তি \n8। বমি এবং ডায়রিয়া ',
-    'Shanjinur Islam Spondon\nLatif Siddiq Sunny\nLatifur Rahman\nMarium Mostafiz Mou\nMoynul Hasan\nNafisa Sadat Prova\nRizvan Ahmed Rafsan\Ariful Haque'
+    'Shanjinur Islam Spondon\nLatif Siddiq Sunny\nLatifur Rahman\nMarium Mostafiz Mou\nMoynul Hasan\nNafisa Sadat Prova\nRizvan Ahmed Rafsan\nAriful Haque'
   ];
 
   @override
@@ -27,7 +27,7 @@ class Symptoms extends StatelessWidget {
         backgroundColor: Colors.redAccent,
         body: PageView.builder(
           controller: controller,
-          itemCount: 3,
+          itemCount: 4,
           itemBuilder: (BuildContext context, int index) {
             return Center(
               child: Container(

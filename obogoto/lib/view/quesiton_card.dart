@@ -1044,7 +1044,6 @@ class QuestionCardState extends State<QuestionCard> {
     int _contactState = cc == "Yes" ? 1 : 0;
     int _coughState = cough == "Yes" ? 1 : 0;
     int _lungState = lung == "Yes" ? 1 : 0;
-    int _sexState = sex == "Male" ? 1 : 0;
 
     var countryMap = {
       'china': 2,
@@ -1269,10 +1268,10 @@ class QuestionCardState extends State<QuestionCard> {
                         if(decision==-1){
                           disease="Ok";
                         }
-                        else if(disease==0){
+                        else if(decision==0){
                           disease="flu";
                         }
-                        else if(disease==1){
+                        else if(decision==1){
                           disease="corona";
                         }
                         else{
