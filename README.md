@@ -1,2 +1,2 @@
-# COVID19
+# Obogoto
 Obogoto, as the name suggests, is an app that helps to create general awareness among the people of Bangladesh for the recent COVID-19 pandemic. This app is able to predict the probability of corona affection to 95% from the symptoms. Key features of this app Evaluate user’s physical condition against the common symptoms of COVID-19 and to seek appropriate medical attention Learn about the updated worldwide and nationwide statistics View the list of updated COVID-19 test centers and dedicated hospitals Take preventive measures that can reduce the spread of the disease Make better decision regarding the overall lifestyle choices during this pandemic After the end of pandemic it can be used for general purpose checkup of diseases.
